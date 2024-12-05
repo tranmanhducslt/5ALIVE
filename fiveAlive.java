@@ -44,7 +44,13 @@ public class fiveAlive{
                     default: continue; // no type has 7 of each
                 }
             }
+            shuffleDeck();
         }
+        public card drawCard(){
+            if (cards.size() == 0) return null;
+            return cards.remove(0);
+        }
+        public void shuffleDeck(){ Collections.shuffle(cards); }
     }
     public static void main(String args[]){
         System.out.println("Test!");
