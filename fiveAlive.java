@@ -41,7 +41,7 @@ public class fiveAlive{
                         cards.add(new card(cardType.TWO));
                         cards.add(new card(cardType.THREE));
                         cards.add(new card(cardType.FOUR));
-                    default: continue;
+                    default: continue; // no type has 7 of each
                 }
             }
         }
