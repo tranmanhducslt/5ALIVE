@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 public class fiveAlive{
     enum cardType{ // types of cards
-        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, DRAW_1, DRAW_2, PASS_ME_BY, REVERSE, SKIP, EQ_21, EQ_10, EQ_0, REDEAL, BOMB
+        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, DRAW_1, DRAW_2, PASS, REVERSE, SKIP, EQ_21, EQ_10, EQ_0, REDEAL, BOMB
     }
     public static class card{ // single card
         private cardType type;
@@ -30,7 +30,7 @@ public class fiveAlive{
                     case 5: // 4 of each
                         cards.add(new card(cardType.FIVE));
                         cards.add(new card(cardType.SKIP));
-                        cards.add(new card(cardType.PASS_ME_BY));
+                        cards.add(new card(cardType.PASS));
                     case 4: // 5 of each
                         cards.add(new card(cardType.EQ_21));
                     case 3: // 6 of each
