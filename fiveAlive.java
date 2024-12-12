@@ -10,10 +10,23 @@ public class fiveAlive{
         public void setCardType(cardType type){ this.type = type; }
         public card(cardType type){ setCardType(type); }
     }
-    public static class deck{ // draw deck in game 
+    public static class pack{ // parent class for packs: draw, discard and player
         private ArrayList<card> cards;
-        public deck(){
-            cards = new ArrayList<card>();
+        public pack(){ cards = new ArrayList<card>(); }
+        public boolean isEmpty(){ return cards.isEmpty(); }
+        public void shuffle(){ Collections.shuffle(cards); }
+        public void reset(){ cards.clear(); }
+        public void addCard(card c){ cards.add(c); }
+        public int size(){ return cards.size(); }
+        public card pickCard(int index, boolean playIt){
+            if (cards.size() <= index) return null;
+            card c = cards.get(index);
+            if (playIt) cards.remove(index); return c;
+        }
+    }
+    public static class draw extends pack{ // draw pack in game 
+        private ArrayList<card> cards;
+        public draw(){
             for (int i = 1; i <= 8; ++i){
                 switch(i){
                     case 8: // 1 of each
@@ -44,13 +57,11 @@ public class fiveAlive{
                     default: continue; // no type has 7 of each
                 }
             }
-            shuffleDeck();
+            shuffle();
         }
-        public card drawCard(){
-            if (cards.size() == 0) return null;
-            return cards.remove(0);
-        }
-        public void shuffleDeck(){ Collections.shuffle(cards); }
+    }
+    public static class discard extends pack{ // discard pack in game
+        public discard(){ reset(); }
     }
     public static void main(String args[]){
         System.out.println("Test!");
