@@ -2,13 +2,13 @@ import java.util.*;
 public class Player{
     private String name;
     private int lives;
-    private bool lost;
-    private pack hand;
+    private boolean lost;
+    private packHand hand;
     private String message;
     public Player(String name){
         this.name = name;
         this.lives = 5;
-        this.hand = new pack();
+        this.hand = new packHand();
     }
     public String getName() {
         return name;
