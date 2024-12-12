@@ -13,10 +13,11 @@ public class fiveAlive{
     public static class pack{ // parent class for packs: draw, discard and player
         private ArrayList<card> cards;
         public pack(){ cards = new ArrayList<card>(); }
+        public pack(pack p){ cards = new ArrayList<card>(p.cards); }
         public boolean isEmpty(){ return cards.isEmpty(); }
         public void shuffle(){ Collections.shuffle(cards); }
         public void reset(){ cards.clear(); }
-        public void addCard(card c){ cards.add(c); }
+        public void addCard(card c){ cards.add(0, c); }
         public int size(){ return cards.size(); }
         public card pickCard(int index, boolean playIt){
             if (cards.size() <= index) return null;
@@ -24,9 +25,9 @@ public class fiveAlive{
             if (playIt) cards.remove(index); return c;
         }
     }
-    public static class draw extends pack{ // draw pack in game 
+    public static class packDraw extends pack{ // draw pack in game 
         private ArrayList<card> cards;
-        public draw(){
+        public packDraw(){
             for (int i = 1; i <= 8; ++i){
                 switch(i){
                     case 8: // 1 of each
@@ -59,9 +60,15 @@ public class fiveAlive{
             }
             shuffle();
         }
+        public packDraw(packDraw p){ super(p); }
     }
-    public static class discard extends pack{ // discard pack in game
-        public discard(){ reset(); }
+    public static class packDiscard extends pack{ // discard pack in game
+        public packDiscard(){ super(); }
+        public packDiscard(packDiscard p){ super(p); }
+    }
+    public static class packHand extends pack{ // player pack in game
+        public packHand(){ super(); }
+        public packHand(packHand p){ super(p); }
     }
     public static void main(String args[]){
         System.out.println("Test!");
