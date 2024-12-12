@@ -1,4 +1,5 @@
-import card;
+import package.card;
+import java.util.*;
 public static class pack{ // parent class for packs: draw, discard and player
     private ArrayList<card> cards;
     public pack(){ cards = new ArrayList<card>(); }
@@ -14,7 +15,7 @@ public static class pack{ // parent class for packs: draw, discard and player
         if (playIt) cards.remove(index); return c;
     }
 }
-public static class packDraw extends pack{ // draw pack in game 
+class packDraw extends pack{ // draw pack in game 
     private ArrayList<card> cards;
     public packDraw(){
         for (int i = 1; i <= 8; ++i){
@@ -51,11 +52,11 @@ public static class packDraw extends pack{ // draw pack in game
     }
     public packDraw(packDraw p){ super(p); }
 }
-public static class packDiscard extends pack{ // discard pack in game
+class packDiscard extends pack{ // discard pack in game
     public packDiscard(){ super(); }
     public packDiscard(packDiscard p){ super(p); }
 }
-public static class packHand extends pack{ // player pack in game
+class packHand extends pack{ // player pack in game
     public packHand(){ super(); }
     public packHand(packHand p){ super(p); }
 }
