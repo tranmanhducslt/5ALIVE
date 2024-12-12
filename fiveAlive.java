@@ -13,6 +13,7 @@ public class fiveAlive{
     public static class pack{ // parent class for packs: draw, discard and player
         private ArrayList<card> cards;
         public pack(){ cards = new ArrayList<card>(); }
+        public boolean isEmpty(){ return cards.isEmpty(); }
         public void shuffle(){ Collections.shuffle(cards); }
         public void reset(){ cards.clear(); }
         public void addCard(card c){ cards.add(c); }
@@ -58,6 +59,9 @@ public class fiveAlive{
             }
             shuffle();
         }
+    }
+    public static class discard extends pack{ // discard pack in game
+        public discard(){ reset(); }
     }
     public static void main(String args[]){
         System.out.println("Test!");
