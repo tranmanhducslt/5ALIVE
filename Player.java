@@ -1,5 +1,5 @@
 import java.util.*;
-import game.card; // Correct import
+
 
 public class Player{
     private String name;
@@ -27,14 +27,21 @@ public class Player{
         }
     }
 
-    public void playCard(Card card, int tableValue) {
-        tableValue += card.getValue(); // Add card value to table
+    public boolean isLost() {
+        return lost;
+    }
+    public void playCard(Card card, Table table) {
+        // Add the card value to the table count
+        table.updateCount(card);
 
-        if (tableValue > 21) {
-            lostLive();  // Player loses 1 live
+        // Remove the card from the player's hand
+        hand.remove(card);
+
+        // Check if the table count exceeds 21
+        if (table.getCount() > 21) {
+            System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
+            lostLive();
         }
-
-        hand.remove(card); // Remove card from hand after playing it
     }
 
     public void setName(String name) {
