@@ -2,94 +2,62 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+public class Table {
+    private int count; // Current count on the table
+    private List<Card> totalCards; // All cards in the game
+    private List<Card> remainingCards; // Cards not dealt to players or played
 
-import javax.smartcardio.Card;
+    // Constructor
+    public Table() {
+        this.count = 0;
+        this.totalCards = Card.addCard(); // Initialize with all cards
+        this.remainingCards = new ArrayList<>(totalCards); // Initially, all cards are remaining
+        Card.shuffle(remainingCards); // Shuffle the deck
+    }
 
-import game.card;
+    // Method to deal 10 cards to each player at the start of a round
+    public void dealCards(List<Player> players) {
+        for (Player player : players) {
+            for (int i = 0; i < 10; i++) {
+                if (!remainingCards.isEmpty()) {
+                    player.pickCard(remainingCards.remove(0)); // Deal a card and remove it from remaining cards
+                }
+            }
+        }
+    }
 
-public class table extends player{
-    private <card> cards;
-    private int table_id;
-    private <player> players;
-    List<card> deck = createDeck();
-    List<remainCard> remainDeck = remainCard();
-    public sumTable=0;
+    // Method to update the count when a player plays a card
+    public void updateCount(Card card) {
+        this.count += card.getValue();
+    }
 
-    //update the remain card after a round
-    public static List<Card> remainCard() { 
-        List<Card> deck = deck.rm(players.cards); 
-        for (player playes: list_of_players){ { 
-            for (int i = 0; i < 4; i++) { 
-                // Assuming 4 copies of each card 
-                deck.add(new Card(value)); 
-            } 
-        } 
-        return deck; 
-    }
-    void addPlayer(){
-        //add player to table
-    }
-    //shuffle the deck
-    public static void shuffleDeck(List<Card> deck) { 
-        Collections.shuffle(deck); 
-    }
-    //deal the cards
-    void deal(){
-        //deal the cards
-    }
-    //update the desk after a round
-    void updateDeck(){
-        //update the deck
-    }
-    //add all the cards to the table
-    public static List<Card> createDeck() { 
-        List<Card> deck = new ArrayList<>(); 
-        for (Integer value : ALL_CARDS) { 
-            for (int i = 0; i < 4; i++) { 
-                // Assuming 4 copies of each card 
-                deck.add(new Card(value)); 
-            } 
-        } 
-        return deck; 
-    }
-    //reset the table after 1 player deal all their card
-    void resetTable(){
-        //reset the table
-    }
-} 
+    // Method to reset the round when a player empties their hand
+    public void resetRound(List<Player> players) {
+        System.out.println("Round reset! All players lose 1 life except the player who emptied their hand.");
 
-}
-class draw{
-    private int draw_id;
-    private int user_id;
-    private int table_id;
-    private int amount;
-    private int time;
-    
-    public draw(int draw_id, int user_id, int table_id, int amount, int time){
-        this.draw_id = draw_id;
-        this.user_id = user_id;
-        this.table_id = table_id;
-        this.amount = amount;
-        this.time = time;
+        // Reduce lives for all players except the one who reset the round
+        for (Player player : players) {
+            if (!player.getHand().isEmpty()) {
+                player.lostLive();
+            }
+        }
+
+        // Reset the table count and reinitialize remaining cards
+        this.count = 0;
+        this.remainingCards = new ArrayList<>(totalCards);
+        Card.shuffle(remainingCards);
+
+        // Deal 10 new cards to each player
+        dealCards(players);
     }
-    public int getDrawId(){
-        return draw_id;
+
+    // Getter for the current count
+    public int getCount() {
+        return count;
     }
-    public int getUserId(){
-        return user_id;
-    }
-    public int getTableId(){
-        return table_id;
-    }
-    public int getAmount(){
-        return amount;
-    }
-    public int getTime(){
-        return time;
-    }
-    //add a draw to the database
-    public void addDraw(){
-        //add draw to database
+
+    // Getter for remaining cards
+    public List<Card> getRemainingCards() {
+        return remainingCards;
     }
 }
