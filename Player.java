@@ -1,5 +1,5 @@
+import package.pack;
 import java.util.*;
-
 
 public class Player{
     private String name;
