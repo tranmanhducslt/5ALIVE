@@ -1,4 +1,4 @@
-import package.pack;
+package src;
 import java.util.*;
 
 public class Player{
@@ -54,11 +54,11 @@ public class Player{
         setName(newName);
         System.out.println("Player's name has been changed to: " + this.name);
     }
-    public String sendMsg(){
+    public void sendMsg(){
         System.out.println("Message sent..");
     }
     public boolean goOut(){
-
+        return hand.isEmpty();
     }
     public void pickCard(Card card) {
         hand.add(card);
