@@ -4,7 +4,6 @@ import java.util.*;
 public class Player{
     private String name;
     private int lives;
-    private boolean lost;
     private List<Card> hand;
     private String message;
     public Player(String name){
@@ -19,16 +18,14 @@ public class Player{
     public int getLives() {
         return lives;
     }
-
+    public boolean isLost() {
+        return lives <= 0;
+    }
     public void lostLive() {
         this.lives--;
         if (this.lives <= 0) {
             System.out.println(name + " has lost all their lives!");
         }
-    }
-
-    public boolean isLost() {
-        return lost;
     }
     public void playCard(Card card, Table table) {
         // Add the card value to the table count
@@ -56,9 +53,6 @@ public class Player{
     }
     public void sendMsg(){
         System.out.println("Message sent..");
-    }
-    public boolean goOut(){
-        return hand.isEmpty();
     }
     public void pickCard(Card card) {
         hand.add(card);

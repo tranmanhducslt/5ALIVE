@@ -7,9 +7,14 @@ public class Table {
     private PackDiscard discardPack;
 
     // Constructor, also to reset every new round
-    public Table(){
+    public Table(List<Player> players) {
+        for (Player player : players) 
+            if (!player.getHand().isEmpty()) 
+                player.lostLive();
         this.count = 0;
         this.drawPack = new PackDraw();
+        this.discardPack = new PackDiscard();
+        dealCards(players);
     }
 
     // Method to deal 10 cards to each player at the start of a round
