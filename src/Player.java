@@ -39,13 +39,11 @@ public class Player{
     public void setName(String name) {
         this.name = name;
     }
-    public void rename() {
-        Scanner scanner = new Scanner(System.in);
+    public void rename(Scanner scanner) {
         System.out.print("Enter a new name: ");
         String newName = scanner.nextLine();
         setName(newName);
         System.out.println("Player's name has been changed to: " + this.name);
-        scanner.close();
     }
     public void sendMsg(){
         System.out.println("Message sent..");
