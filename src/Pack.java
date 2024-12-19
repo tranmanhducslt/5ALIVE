@@ -1,5 +1,4 @@
 package src;
-
 import java.util.*;
 public class Pack{ // parent class for packs: draw, discard and player
     protected ArrayList<Card> cards;
@@ -16,18 +15,16 @@ public class Pack{ // parent class for packs: draw, discard and player
         if (playIt) cards.remove(index); return c;
     }
 }
-/* this pack has one extra SEVEN card so that games of maximum
-5 players don't need a refresh of the draw pack midgame */
 class PackDraw extends Pack{ // draw pack in game 
     private ArrayList<Card> cards;
     public PackDraw(){
         for (int i = 1; i <= 8; ++i){
             switch(i){
                 case 8: // 1 of each
+                    cards.add(new Card(cardType.SEVEN));
                     cards.add(new Card(cardType.BOMB));
                     cards.add(new Card(cardType.REDEAL));
                 case 7: // 2 of each
-                    cards.add(new Card(cardType.SEVEN));
                     cards.add(new Card(cardType.SIX));
                     cards.add(new Card(cardType.EQ_10));
                     cards.add(new Card(cardType.DRAW_1));
@@ -53,9 +50,8 @@ class PackDraw extends Pack{ // draw pack in game
         }
         shuffle();
     }
-    public void refill(PackDiscard p){ // refill empty draw pack with discard pack
-        if (this.isEmpty())
-            this.cards = new ArrayList<Card>(p.cards);
+    public PackDraw(Pack p){
+        cards = new ArrayList<Card>(p.cards);
     }
 }
 class PackDiscard extends Pack{ // discard pack in game

@@ -1,15 +1,13 @@
 package src;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Table {
     private int count; // Current count on the table
     private PackDraw drawPack;
+    private PackDiscard discardPack;
 
     // Constructor, also to reset every new round
-    public Table() {
+    public Table(){
         this.count = 0;
         this.drawPack = new PackDraw();
     }
@@ -23,33 +21,42 @@ public class Table {
                     // deal a card and remove it from remaining cards
     }
 
+    public void refill(PackDiscard discardPack){
+        if (drawPack.isEmpty()) {
+            drawPack = new PackDraw(discardPack);
+            discardPack.reset();
+        }
+    }
+
     // Method to update the count when a player plays a card
     public void updateCount(Card card) {
         switch(card.getCardType()){
             case ZERO:
-                count += 0;
-                break;
             case ONE:
-                count += 1;
-                break;
             case TWO:
-                count += 2;
-                break;
             case THREE:
-                count += 3;
-                break;
             case FOUR:
-                count += 4;
-                break;
             case FIVE:
-                count += 5;
-                break;
             case SIX:
-                count += 6;
-                break;
             case SEVEN:
-                count += 7;
+                count += card.getCardType().ordinal();
                 break;
+            case EQ_21:
+                count = 21;
+                break;
+            case EQ_10:
+                count = 10;
+                break;
+            case EQ_0:
+                count = 0;
+                break;
+            case DRAW_1:
+            case DRAW_2:
+            case PASS:
+            case REVERSE:
+            case SKIP:
+            case REDEAL:
+            case BOMB:
             // will continue later
         }
     }
