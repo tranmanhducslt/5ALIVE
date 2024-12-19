@@ -4,17 +4,16 @@ import java.util.*;
 public class Player{
     private String name;
     private int lives;
-    private List<Card> hand;
+    private PackHand hand;
     private String message;
     public Player(String name){
         this.name = name;
         this.lives = 5;
-        this.hand = new ArrayList<>();
+        this.hand = new PackHand();
     }
     public String getName() {
         return name;
     }
-
     public int getLives() {
         return lives;
     }
@@ -27,12 +26,8 @@ public class Player{
             System.out.println(name + " has lost all their lives!");
         }
     }
-    public void playCard(Card card, Table table) {
-        // Add the card value to the table count
-        table.updateCount(card);
-
-        // Remove the card from the player's hand
-        hand.remove(card);
+    public void playCard(int index, Table table) {
+        table.discardCard(hand.pickCard(index, true));
 
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
@@ -50,14 +45,15 @@ public class Player{
         String newName = scanner.nextLine();
         setName(newName);
         System.out.println("Player's name has been changed to: " + this.name);
+        scanner.close();
     }
     public void sendMsg(){
         System.out.println("Message sent..");
     }
     public void pickCard(Card card) {
-        hand.add(card);
+        hand.addCard(card);
     }
-    public List<Card> getHand() {
+    public PackHand getHand() {
         return hand;
     }
 }

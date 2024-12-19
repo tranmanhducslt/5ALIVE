@@ -14,6 +14,9 @@ public class Pack{ // parent class for packs: draw, discard and player
         Card c = cards.get(index);
         if (playIt) cards.remove(index); return c;
     }
+    public void addCard(Card c, int index){ 
+        cards.add(index, c); 
+    }
 }
 class PackDraw extends Pack{ // draw pack in game 
     private ArrayList<Card> cards;

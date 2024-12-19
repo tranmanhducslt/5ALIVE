@@ -66,6 +66,10 @@ public class Table {
         }
     }
 
+    public void discardCard(Card card){
+        discardPack.addCard(card, 0);
+    }
+
     // Getter for the current count
     public int getCount() {
         return count;
