@@ -50,7 +50,7 @@ public class Player{
     public void sendMsg(){
         System.out.println("Message sent..");
     }
-    public void pickCard(Card card) {
+    public void addCard(Card card) {
         hand.addCard(card);
     }
     public PackHand getHand() {

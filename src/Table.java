@@ -22,7 +22,7 @@ public class Table {
         for (Player player : players) 
             for (int i = 0; i < 10; i++) 
                 if (!drawPack.isEmpty()) 
-                    player.pickCard(drawPack.pickCard(0, true));
+                    player.addCard(drawPack.pickCard(0, true));
                     // deal a card and remove it from remaining cards
     }
 
