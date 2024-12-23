@@ -47,8 +47,11 @@ public class Player{
         System.out.println("Player's name has been changed to: " + this.name);
         scanner.close();
     }
+    public void setMessage(String message) {
+        this.message = message;
+    }
     public void sendMsg(){
-        System.out.println("Message sent..");
+        System.out.println("Message sent: " + message);
     }
     public void addCard(Card card) {
         hand.addCard(card);
