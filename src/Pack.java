@@ -55,6 +55,7 @@ class PackDraw extends Pack{ // draw pack in game
     }
     public PackDraw(Pack p){
         cards = new ArrayList<Card>(p.cards);
+        shuffle();
     }
 }
 class PackDiscard extends Pack{ // discard pack in game

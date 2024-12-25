@@ -45,10 +45,11 @@ public class Player{
         setName(newName);
         System.out.println("Player's name has been changed to: " + this.name);
     }
-    public void sendMsg(){
-        System.out.println("Message sent..");
+    public void sendMsg(String message){
+        this.message = message;
+        System.out.println("Message sent: " + message);
     }
-    public void pickCard(Card card) {
+    public void addCard(Card card) {
         hand.addCard(card);
     }
     public PackHand getHand() {

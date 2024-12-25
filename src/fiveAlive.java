@@ -13,7 +13,7 @@ public class fiveAlive {
             players.add(new Player(name));
         }
         Table table = new Table(players);
-        while (true) {
+        while (true) { // playing loop
             for (Player player : players) {
                 if (player.isLost()) {
                     players = removePlayer(players, player);
@@ -28,8 +28,7 @@ public class fiveAlive {
                     System.out.println("Invalid index! Try again.");
                     continue;
                 }
-                Card card = player.getHand().get(index);
-                player.playCard(card, table);
+                player.playCard(index, table);
                 if (player.isLost()) {
                     System.out.println(player.getName() + " has lost all their lives!");
                 }
@@ -39,6 +38,7 @@ public class fiveAlive {
             }
             if (players.size() == 1) {
                 System.out.println("Game over! " + players.get(0).getName() + " wins!");
+                scanner.close();
                 break;
         }
     }
