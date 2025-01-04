@@ -19,8 +19,8 @@ public class Pack{ // parent class for packs: draw, discard and player
     }
 }
 class PackDraw extends Pack{ // draw pack in game 
-    private ArrayList<Card> cards;
     public PackDraw(){
+        super();
         for (int i = 1; i <= 8; ++i){
             switch(i){
                 case 8: // 1 of each
@@ -60,6 +60,17 @@ class PackDraw extends Pack{ // draw pack in game
 }
 class PackDiscard extends Pack{ // discard pack in game
 }
-class PackHand extends Pack{ // player pack in game
+class PackHand extends Pack { // player pack in game
     
+    @Override
+    public String toString() {
+        if (cards.isEmpty()) {
+            return "Empty Hand";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cards.size(); i++) {
+            sb.append(i).append(": ").append(cards.get(i).getCardType()).append("\n");
+        }
+        return sb.toString();
+    }
 }
