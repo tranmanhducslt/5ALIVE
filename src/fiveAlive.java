@@ -13,36 +13,42 @@ public class fiveAlive {
             players.add(new Player(name));
         }
         Table table = new Table(players);
-        while (true) { // playing loop
-            for (Player player : players) {
-                if (player.isLost()) {
-                    players = removePlayer(players, player);
-                    continue;
-                }
-                System.out.println("Current count: " + table.getCount());
-                System.out.println(player.getName() + "'s turn");
-                System.out.println("Your hand: " + player.getHand());
-                System.out.print("Enter card index to play: ");
-                int index = scanner.nextInt();
-                if (index < 0 || index >= player.getHand().size()) {
-                    System.out.println("Invalid index! Try again.");
-                    continue;
-                }
-                player.playCard(index, table);
-                if (player.isLost()) {
-                    System.out.println(player.getName() + " has lost all their lives!");
-                }
-                if (player.getHand().isEmpty()) {
-                    table = new Table(players);
-                }
+        while (true) { // Main game loop
+            Player currentPlayer = table.getCurrentPlayer(players);  // Get the current player
+            
+            // Handle player's turn
+            System.out.println("Current count: " + table.getCount());
+            System.out.println(currentPlayer.getName() + "'s turn");
+            System.out.println("Your hand: " + currentPlayer.getHand());
+            System.out.print("Enter card index to play: ");
+            int index = scanner.nextInt();
+
+            // If invalid index, retry
+            if (index < 0 || index >= currentPlayer.getHand().size()) {
+                System.out.println("Invalid index! Try again.");
+                continue;
             }
+
+            // Play card and update count
+            currentPlayer.playCard(index, table);
+
+            // Check if the player lost
+            if (currentPlayer.isLost()) {
+                System.out.println(currentPlayer.getName() + " has lost all their lives!");
+            }
+
+            // Move to next player
+            table.nextPlayer(players);
+
+            // Check if there is only one player left
             if (players.size() == 1) {
                 System.out.println("Game over! " + players.get(0).getName() + " wins!");
-                scanner.close();
                 break;
+            }
         }
+        
+        scanner.close();
     }
-}
 public static List<Player> removePlayer(List<Player> players, Player player) {
         players.remove(player);
         return players;
