@@ -26,10 +26,10 @@ public class Player{
             System.out.println(name + " has lost all their lives!");
         }
     }
-    public void playCard(int index, Table table) {
+    public void playCard(int index, Table table, List<Player> players) {
         Card playedCard = hand.pickCard(index, true);
         table.discardCard(playedCard);
-        table.updateCount(playedCard);
+        table.updateCount(playedCard, players);
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
             System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
@@ -58,5 +58,24 @@ public class Player{
     }
     public PackHand getHand() {
         return hand;
+    }
+    public boolean hasCard(cardType type) {
+        for (Card card : hand.getCards()) {
+            if (card.getCardType() == type) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void discardCard(cardType type, Table table) {
+        Iterator<Card> iterator = hand.getCards().iterator();
+        while (iterator.hasNext()) {
+            Card card = iterator.next();
+            if (card.getCardType() == type) {
+                iterator.remove();
+                table.discardCard(card);
+                break;
+            }
+        }
     }
 }

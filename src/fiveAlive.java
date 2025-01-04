@@ -30,11 +30,41 @@ public class fiveAlive {
             }
 
             // Play card and update count
-            currentPlayer.playCard(index, table);
+            currentPlayer.playCard(index, table, players);
+            // if count exceed 21, reset count
+            if(table.getCount() > 21){
+                System.out.println("Count exceeded 21, count now resets to 0");
+                table.resetCount();
+            }
+            
+            // Skip next player when a skip card is played
+            if (table.shouldSkipNextPlayer() == true) {
+                table.resetSkipFlag();
+                table.nextPlayer(players);
+                System.out.println("Skipping " + table.getCurrentPlayer(players).getName());
+            }
+            // BOMB card played
+            if(table.bombCheck() == true){
+                for (Player player : players) {
+                    if (player != currentPlayer) {  // Skip the current player
+                        if (!player.hasCard(cardType.ZERO)) {
+                            player.lostLive();
+                            System.out.println(player.getName() + " loses 1 life.");
+                        } else {
+                            player.discardCard(cardType.ZERO, table);
+                            System.out.println(player.getName() + " discarded their ZERO!");
+                        }
+                    }
+                }
+                table.resetBombFlag();
+            }
+            
 
             // Check if the player lost
             if (currentPlayer.isLost()) {
                 System.out.println(currentPlayer.getName() + " has lost all their lives!");
+                players = table.removePlayer(players, currentPlayer, table); // write a method to remove player from the arraylist
+                continue;
             }
 
             // Move to next player
@@ -48,9 +78,5 @@ public class fiveAlive {
         }
         
         scanner.close();
-    }
-public static List<Player> removePlayer(List<Player> players, Player player) {
-        players.remove(player);
-        return players;
     }
 }

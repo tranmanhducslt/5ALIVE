@@ -6,6 +6,9 @@ public class Table {
     private PackDraw drawPack;
     private PackDiscard discardPack;
     private int currentPlayerIndex; // keep track of whose turn it is
+    private boolean isClockwise;
+    private boolean skipNextPlayer;
+    private boolean bombCardPlayed;
 
     // Constructor, also to reset every new round
     public Table(List<Player> players) {
@@ -14,6 +17,9 @@ public class Table {
                 player.lostLive();
         this.currentPlayerIndex = 0;
         this.count = 0;
+        this.isClockwise = true;
+        this.skipNextPlayer = false;
+        this.bombCardPlayed = false;
         this.drawPack = new PackDraw();
         this.discardPack = new PackDiscard();
         dealCards(players);
@@ -23,10 +29,29 @@ public class Table {
     public Player getCurrentPlayer(List<Player> players) {
         return players.get(currentPlayerIndex);
     }
-    
-    // Move to the next player
+
     public void nextPlayer(List<Player> players) {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        if(isClockwise){
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        }
+        else{
+            currentPlayerIndex = (currentPlayerIndex - 1 + players.size()) % players.size();
+        }
+        
+    }
+
+    public void reverseDirection() {
+        isClockwise = !isClockwise;
+    }
+    public static List<Player> removePlayer(List<Player> players, Player player, Table table) {
+        int playerIndex = players.indexOf(player);
+        players.remove(player);
+
+        // Adjust index to point to the next player
+        if (playerIndex <= table.currentPlayerIndex) {
+            table.currentPlayerIndex--;  // Shift index back if needed
+        }
+        return players;
     }
 
     // Method to deal 10 cards to each player at the start of a round
@@ -46,7 +71,7 @@ public class Table {
     }
 
     // Method to update the count when a player plays a card
-    public void updateCount(Card card) {
+    public void updateCount(Card card, List<Player> players) {
         switch(card.getCardType()){
             case ZERO:
             case ONE:
@@ -68,20 +93,60 @@ public class Table {
                 count = 0;
                 break;
             case DRAW_1:
+                if (!drawPack.isEmpty()) {
+                    Player currentPlayer = getCurrentPlayer(players);
+                    currentPlayer.addCard(drawPack.pickCard(0, true));
+                    System.out.println(currentPlayer.getName() + " draws 1 card.");
+                }
+                break;
             case DRAW_2:
+                if (!drawPack.isEmpty()) {
+                    Player currentPlayer = getCurrentPlayer(players);
+                    for (int i = 0; i < 2; i++) {
+                        if (!drawPack.isEmpty()) {
+                            currentPlayer.addCard(drawPack.pickCard(0, true));
+                        }
+                    }
+                    System.out.println(currentPlayer.getName() + " draws 2 cards.");
+                }
+                break;
             case PASS:
+                System.out.println(getCurrentPlayer(players).getName() + " passes their turn.");
+                break;
             case REVERSE:
+                isClockwise = !isClockwise;
+                System.out.println("Play now proceeds in the opposite direction");
+                break;
             case SKIP:
+                System.out.println("Next player is skipped!");
+                skipNextPlayer = true;
+                break;
             case REDEAL:
             case BOMB:
-            if(count > 21){
-                System.out.println("Table count exceeded 21!");
-            }
+                System.out.println("BOMB card played. Count is reseted to 0. All other players must immediately discard a ZERO.");
+                count = 0;
+                bombCardPlayed = true;
         }
+    }
+    public boolean shouldSkipNextPlayer(){
+        return skipNextPlayer;
+    }
+    public void resetSkipFlag(){
+        skipNextPlayer = false;
+        return;
     }
 
     public void discardCard(Card card){
         discardPack.addCard(card, 0);
+    }
+    public void resetCount(){
+        count = 0;
+    }
+    public boolean bombCheck(){
+        return bombCardPlayed;
+    }
+    public void resetBombFlag(){
+        bombCardPlayed = false;
     }
 
     // Getter for the current count

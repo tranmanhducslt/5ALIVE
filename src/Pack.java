@@ -73,4 +73,7 @@ class PackHand extends Pack { // player pack in game
         }
         return sb.toString();
     }
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }
