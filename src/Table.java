@@ -5,16 +5,28 @@ public class Table {
     private int count; // Current count on the table
     private PackDraw drawPack;
     private PackDiscard discardPack;
+    private int currentPlayerIndex; // keep track of whose turn it is
 
     // Constructor, also to reset every new round
     public Table(List<Player> players) {
         for (Player player : players) 
             if (!player.getHand().isEmpty()) 
                 player.lostLive();
+        this.currentPlayerIndex = 0;
         this.count = 0;
         this.drawPack = new PackDraw();
         this.discardPack = new PackDiscard();
         dealCards(players);
+    }
+
+    // Return the player at the current index
+    public Player getCurrentPlayer(List<Player> players) {
+        return players.get(currentPlayerIndex);
+    }
+    
+    // Move to the next player
+    public void nextPlayer(List<Player> players) {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 
     // Method to deal 10 cards to each player at the start of a round
@@ -62,7 +74,9 @@ public class Table {
             case SKIP:
             case REDEAL:
             case BOMB:
-            // will continue later
+            if(count > 21){
+                System.out.println("Table count exceeded 21!");
+            }
         }
     }
 
