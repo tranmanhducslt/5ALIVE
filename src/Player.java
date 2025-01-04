@@ -27,12 +27,14 @@ public class Player{
         }
     }
     public void playCard(int index, Table table) {
-        table.discardCard(hand.pickCard(index, true));
-
+        Card playedCard = hand.pickCard(index, true);
+        table.discardCard(playedCard);
+        table.updateCount(playedCard);
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
             System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
             lostLive();
+            // Continue later
         }
     }
 
