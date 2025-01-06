@@ -78,4 +78,8 @@ public class Player{
             }
         }
     }
+    // Clear a player's hand, useful for redeal card
+    public void clearHand() {
+        hand.getCards().clear();
+    }
 }

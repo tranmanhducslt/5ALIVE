@@ -122,6 +122,28 @@ public class Table {
                 skipNextPlayer = true;
                 break;
             case REDEAL:
+                System.out.println("REDEAL card played! All players' hands are collected and reshuffled.");
+                List<Card> allCards = new ArrayList<>();
+            
+                // Collect all cards from players' hands
+                for (Player player : players) {
+                    allCards.addAll(player.getHand().getCards());
+                    player.getHand().clear();  // Empty hand
+                }
+                        Collections.shuffle(allCards);
+            
+                // Deal the cards starting with the next player
+                int startIndex = (currentPlayerIndex + 1) % players.size();
+                int cardIndex = 0;
+                while (cardIndex < allCards.size()) {
+                    for (int i = 0; i < players.size() && cardIndex < allCards.size(); i++) {
+                        Player player = players.get((startIndex + i) % players.size());
+                        player.addCard(allCards.get(cardIndex++));  // Deal one card to each player
+                    }
+                }
+                count = 0;
+                System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
+                break;
             case BOMB:
                 System.out.println("BOMB card played. Count is reseted to 0. All other players must immediately discard a ZERO.");
                 count = 0;

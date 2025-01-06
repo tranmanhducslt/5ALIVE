@@ -76,4 +76,7 @@ class PackHand extends Pack { // player pack in game
     public ArrayList<Card> getCards() {
         return cards;
     }
+    public void clear() {
+        cards.clear();
+    }
 }
