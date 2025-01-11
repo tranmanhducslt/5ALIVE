@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.PlayerSetupController" style="-fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298);">
+    <children>
+        <Label text="Player Setup" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <Label text="Select Number of Players:" style="-fx-font-size: 18px; -fx-text-fill: white;" />
+        <ComboBox fx:id="playerCountComboBox" prefWidth="200.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                    <String fx:value="5" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <VBox fx:id="playerNamesContainer" spacing="10.0" alignment="CENTER" />
+        <Button text="Start Game" fx:id="startGameButton" onAction="#startGame" prefWidth="200.0" />
+    </children>
+</VBox>
