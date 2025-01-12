@@ -1,0 +1,18 @@
+/* General button styles */
+.button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: all 0.3s ease;
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-scale-x: 1.1; /* Increase size by 10% */
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 2);
+}

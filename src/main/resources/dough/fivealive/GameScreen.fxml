@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298);" prefHeight="720.0" prefWidth="1080.0">
+    <children>
+        <Label text="Game Screen" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <!-- Add game-related UI components here -->
+    </children>
+</VBox>

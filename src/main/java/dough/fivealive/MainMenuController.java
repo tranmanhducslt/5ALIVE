@@ -20,7 +20,7 @@ public class MainMenuController {
     private Button exitButton;
 
     @FXML
-    public void startGame() {
+    public void startSetup() {
         System.out.println("Starting the game...");
 
         try {
