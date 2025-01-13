@@ -63,6 +63,7 @@ public class Table {
                     // deal a card and remove it from remaining cards
     }
 
+    // Method to refill from discard pack if no more cards to draw
     public void refill(PackDiscard discardPack){
         if (drawPack.isEmpty()) {
             drawPack = new PackDraw(discardPack);

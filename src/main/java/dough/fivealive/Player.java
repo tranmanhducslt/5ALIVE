@@ -26,6 +26,7 @@ public class Player{
             System.out.println(name + " has lost all their lives!");
         }
     }
+    // Method to play a card from the player's hand
     public void playCard(int index, Table table, List<Player> players) {
         Card playedCard = hand.pickCard(index, true);
         table.discardCard(playedCard);
@@ -41,6 +42,8 @@ public class Player{
     public void setName(String name) {
         this.name = name;
     }
+
+    // Method to rename a player
     public void rename() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a new name: ");
@@ -78,7 +81,8 @@ public class Player{
             }
         }
     }
-    // Clear a player's hand, useful for redeal card
+    
+    // Method to clear a player's hand, useful for redeal card
     public void clearHand() {
         hand.getCards().clear();
     }
