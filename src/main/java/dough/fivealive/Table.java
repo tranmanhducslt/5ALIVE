@@ -145,7 +145,7 @@ public class Table {
                 System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
                 break;
             case BOMB:
-                System.out.println("BOMB! Count is reset to 0. All other players must immediately discard a ZERO.");
+                System.out.println("BOOM! Count is reset to 0. All other players must immediately discard a ZERO.");
                 count = 0;
                 bombCardPlayed = true;
                 for (Player player: players) 
