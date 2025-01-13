@@ -1,7 +1,7 @@
 # 5ALIVE
 adaptation of the 2021 Hasbro card game 5 Alive
 
-written in Java using Swift for GUI
+written in Java using JavaFX for GUI
 
 ## how to play
 - be the last person to survive when all others run out of lives
