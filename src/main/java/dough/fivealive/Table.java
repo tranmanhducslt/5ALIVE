@@ -18,8 +18,8 @@ public class Table {
         this.currentPlayerIndex = 0;
         this.count = 0;
         this.isClockwise = true;
-        this.skipNextPlayer = false;
-        this.bombCardPlayed = false;
+        this.skipNextPlayer = false; // Flag for the 4 Skip cards 
+        this.bombCardPlayed = false; // Flag to check if the Bomb card was played
         this.drawPack = new PackDraw();
         this.discardPack = new PackDiscard();
         dealCards(players);
