@@ -33,11 +33,11 @@ public class Player{
         table.updateCount(playedCard, players);
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
-            System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
+            System.out.println(name + " does not have a valid card and loses 1 life!");
             lostLive();
             // return last played card to them (per rules, if can't play, don't play)
             hand.addCard(playedCard);
-            // Continue later
+            table.popCard();
         }
     }
 
