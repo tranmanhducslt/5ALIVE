@@ -70,16 +70,19 @@ public class Player{
         }
         return false;
     }
-    public void discardCard(cardType type, Table table) {
+    
+    // Method to discard a card from the player's hand, returns true if successful
+    public boolean discardCard(cardType type, Table table) {
         Iterator<Card> iterator = hand.getCards().iterator();
         while (iterator.hasNext()) {
             Card card = iterator.next();
             if (card.getCardType() == type) {
                 iterator.remove();
                 table.discardCard(card);
-                break;
+                return true;
             }
         }
+        return false;
     }
     
     // Method to clear a player's hand, useful for redeal card
