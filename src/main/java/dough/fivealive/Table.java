@@ -115,14 +115,14 @@ public class Table {
                 break;
             case REVERSE:
                 isClockwise = !isClockwise;
-                System.out.println("Play now proceeds in the opposite direction");
+                System.out.println("Play now proceeds in the opposite direction.");
                 break;
             case SKIP:
                 System.out.println("Next player is skipped!");
                 skipNextPlayer = true;
                 break;
             case REDEAL:
-                System.out.println("REDEAL card played! All players' hands are collected and reshuffled.");
+                System.out.println("All players' hands are collected and reshuffled.");
                 List<Card> allCards = new ArrayList<>();
             
                 // Collect all cards from players' hands
@@ -145,7 +145,7 @@ public class Table {
                 System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
                 break;
             case BOMB:
-                System.out.println("BOMB card played. Count is reseted to 0. All other players must immediately discard a ZERO.");
+                System.out.println("BOMB! Count is reseted to 0. All other players must immediately discard a ZERO.");
                 count = 0;
                 bombCardPlayed = true;
         }
