@@ -35,6 +35,8 @@ public class Player{
         if (table.getCount() > 21) {
             System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
             lostLive();
+            // return last played card to them (per rules, if can't play, don't play)
+            hand.addCard(playedCard);
             // Continue later
         }
     }
@@ -85,5 +87,9 @@ public class Player{
     // Method to clear a player's hand, useful for redeal card
     public void clearHand() {
         hand.getCards().clear();
+    }
+
+    public boolean goOut() {
+        return hand.isEmpty();
     }
 }

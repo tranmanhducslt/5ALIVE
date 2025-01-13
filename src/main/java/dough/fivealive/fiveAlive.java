@@ -17,9 +17,9 @@ public class fiveAlive {
             Player currentPlayer = table.getCurrentPlayer(players);  // Get the current player
             
             // Handle player's turn
-            System.out.println("Current count: " + table.getCount());
-            System.out.println(currentPlayer.getName() + "'s turn");
-            System.out.println("Your hand: " + currentPlayer.getHand());
+            System.out.println("\nCurrent count: " + table.getCount());
+            System.out.println(currentPlayer.getName() + "'s turn - Lives: " + currentPlayer.getLives());
+            System.out.println("Your hand:\n" + currentPlayer.getHand());
             System.out.print("Enter card index to play: ");
             int index = scanner.nextInt();
 
@@ -49,7 +49,7 @@ public class fiveAlive {
                     if (player != currentPlayer) {  // Skip the current player
                         if (!player.hasCard(cardType.ZERO)) {
                             player.lostLive();
-                            System.out.println(player.getName() + " loses 1 life.");
+                            System.out.println(player.getName() + " cannot play a ZERO and loses 1 life.");
                         } else {
                             player.discardCard(cardType.ZERO, table);
                             System.out.println(player.getName() + " discarded their ZERO!");
@@ -59,6 +59,14 @@ public class fiveAlive {
                 table.resetBombFlag();
             }
             
+            // Check if anyone went out
+            for (Player player : players) {
+                if (player.getHand().isEmpty()) {
+                    System.out.println(player.getName() + " has gone out! All other players lose 1 life.");
+                    table = new Table(players);  // Reset the table
+                }
+            }
+
 
             // Check if the player lost
             if (currentPlayer.isLost()) {

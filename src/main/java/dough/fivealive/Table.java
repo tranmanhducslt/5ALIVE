@@ -12,9 +12,11 @@ public class Table {
 
     // Constructor, also to reset every new round
     public Table(List<Player> players) {
-        for (Player player : players) 
+        for (Player player : players){ 
             if (!player.getHand().isEmpty()) 
                 player.lostLive();
+            player.clearHand();
+        }
         this.currentPlayerIndex = 0;
         this.count = 0;
         this.isClockwise = true;
