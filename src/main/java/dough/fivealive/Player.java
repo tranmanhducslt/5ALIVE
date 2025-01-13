@@ -35,7 +35,8 @@ public class Player{
         if (table.getCount() > 21) {
             System.out.println(name + " does not have a valid card and loses 1 life!");
             lostLive();
-            // return last played card to them (per rules, if can't play, don't play)
+            // return last played card from discard pack to them 
+            // (per rules, if can't play, don't play)
             hand.addCard(playedCard);
             table.popCard();
         }
