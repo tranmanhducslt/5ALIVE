@@ -148,6 +148,7 @@ public class Table {
                 System.out.println("BOOM! Count is reset to 0. All other players must immediately discard a ZERO.");
                 count = 0;
                 bombCardPlayed = true;
+                /* 
                 for (Player player: players) 
                     if (player != getCurrentPlayer(players)) {
                         // discard a ZERO if they have one
@@ -158,6 +159,7 @@ public class Table {
                             player.lostLive();
                         }
                     }
+                */
         }
     }
     public boolean shouldSkipNextPlayer(){
