@@ -94,21 +94,21 @@ public class Table {
                 count = 0;
                 break;
             case DRAW_1:
-                if (!drawPack.isEmpty()) {
-                    Player currentPlayer = getCurrentPlayer(players);
-                    currentPlayer.addCard(drawPack.pickCard(0, true));
-                    System.out.println(currentPlayer.getName() + " draws 1 card.");
+                for (Player player: players) {
+                    if (player != getCurrentPlayer(players)) {
+                        if (drawPack.isEmpty()) refill(discardPack);
+                        player.addCard(drawPack.pickCard(0, true));
+                    }
                 }
                 break;
             case DRAW_2:
-                if (!drawPack.isEmpty()) {
-                    Player currentPlayer = getCurrentPlayer(players);
-                    for (int i = 0; i < 2; i++) {
-                        if (!drawPack.isEmpty()) {
-                            currentPlayer.addCard(drawPack.pickCard(0, true));
+                for (Player player: players) {
+                    if (player != getCurrentPlayer(players)) {
+                        for (int i = 0; i < 2; i++) {
+                            if (drawPack.isEmpty()) refill(discardPack);
+                            player.addCard(drawPack.pickCard(0, true));
                         }
                     }
-                    System.out.println(currentPlayer.getName() + " draws 2 cards.");
                 }
                 break;
             case PASS:
