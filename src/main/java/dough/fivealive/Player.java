@@ -73,15 +73,12 @@ public class Player{
     
     // Method to discard a card from the player's hand, returns true if successful
     public boolean discardCard(cardType type, Table table) {
-        Iterator<Card> iterator = hand.getCards().iterator();
-        while (iterator.hasNext()) {
-            Card card = iterator.next();
+        for (Card card : hand.getCards()) 
             if (card.getCardType() == type) {
-                iterator.remove();
+                hand.getCards().remove(card);
                 table.discardCard(card);
                 return true;
             }
-        }
         return false;
     }
     
