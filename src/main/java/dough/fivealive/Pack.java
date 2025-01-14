@@ -17,9 +17,6 @@ public class Pack{ // parent class for packs: draw, discard and player
     public void addCard(Card c, int index){ 
         cards.add(index, c); 
     }
-    public void popCard(){ // remove top card from discard pack
-        cards.remove(0); 
-    } 
 }
 class PackDraw extends Pack{ // draw pack in game 
     public PackDraw(){
