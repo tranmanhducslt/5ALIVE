@@ -164,8 +164,8 @@ public class Table {
     public void discardCard(Card card){
         discardPack.addCard(card, 0);
     }
-    public void popCard(){ // remove top card from discard pack
-        discardPack.popCard();
+    public Card popCard(){ // remove top card from discard pack
+        return discardPack.pickCard(0, true);
     }
     public void resetCount(){
         count = 0;
