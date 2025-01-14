@@ -7,13 +7,19 @@ public class Pack{ // parent class for packs: draw, discard and player
     public boolean isEmpty(){ return cards.isEmpty(); }
     public void shuffle(){ Collections.shuffle(cards); }
     public void reset(){ cards.clear(); }
-    public void addCard(Card c){ cards.add(0, c); }
+
+    // number of cards in the pack
     public int size(){ return cards.size(); }
+
+    // pick a card from the pack, and optionally remove it
     public Card pickCard(int index, boolean playIt){
         if (cards.size() <= index) return null;
         Card c = cards.get(index);
         if (playIt) cards.remove(index); return c;
     }
+
+    // add a card to the pack at a specific index
+    public void addCard(Card c){ cards.add(0, c); }
     public void addCard(Card c, int index){ 
         cards.add(index, c); 
     }
