@@ -37,8 +37,7 @@ public class Player{
             lostLive();
             // return last played card from discard pack to them 
             // (per rules, if can't play, don't play)
-            hand.addCard(playedCard);
-            table.popCard();
+            hand.addCard(table.popCard());
         }
     }
 
