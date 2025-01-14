@@ -12,14 +12,16 @@ public class Table {
 
     // Constructor, also to reset every new round
     public Table(List<Player> players) {
-        for (Player player : players) 
+        for (Player player : players){ 
             if (!player.getHand().isEmpty()) 
                 player.lostLive();
+            player.clearHand();
+        }
         this.currentPlayerIndex = 0;
         this.count = 0;
         this.isClockwise = true;
-        this.skipNextPlayer = false;
-        this.bombCardPlayed = false;
+        this.skipNextPlayer = false; // Flag for the 4 Skip cards 
+        this.bombCardPlayed = false; // Flag to check if the Bomb card was played
         this.drawPack = new PackDraw();
         this.discardPack = new PackDiscard();
         dealCards(players);
@@ -63,6 +65,7 @@ public class Table {
                     // deal a card and remove it from remaining cards
     }
 
+    // Method to refill from discard pack if no more cards to draw
     public void refill(PackDiscard discardPack){
         if (drawPack.isEmpty()) {
             drawPack = new PackDraw(discardPack);
@@ -93,36 +96,36 @@ public class Table {
                 count = 0;
                 break;
             case DRAW_1:
-                if (!drawPack.isEmpty()) {
-                    Player currentPlayer = getCurrentPlayer(players);
-                    currentPlayer.addCard(drawPack.pickCard(0, true));
-                    System.out.println(currentPlayer.getName() + " draws 1 card.");
-                }
+                for (Player player: players) 
+                    if (player != getCurrentPlayer(players)) {
+                        if (drawPack.isEmpty()) refill(discardPack);
+                        player.addCard(drawPack.pickCard(0, true));
+                    }
+                System.out.println("All other players draw 1 card.");
                 break;
             case DRAW_2:
-                if (!drawPack.isEmpty()) {
-                    Player currentPlayer = getCurrentPlayer(players);
-                    for (int i = 0; i < 2; i++) {
-                        if (!drawPack.isEmpty()) {
-                            currentPlayer.addCard(drawPack.pickCard(0, true));
+                for (Player player: players) 
+                    if (player != getCurrentPlayer(players)) 
+                        for (int i = 0; i < 2; i++) {
+                            if (drawPack.isEmpty()) refill(discardPack);
+                            player.addCard(drawPack.pickCard(0, true));
                         }
-                    }
-                    System.out.println(currentPlayer.getName() + " draws 2 cards.");
-                }
+                System.out.println("All other players draw 2 cards.");
                 break;
             case PASS:
                 System.out.println(getCurrentPlayer(players).getName() + " passes their turn.");
                 break;
             case REVERSE:
                 isClockwise = !isClockwise;
-                System.out.println("Play now proceeds in the opposite direction");
+                System.out.println("Play now proceeds in the opposite direction.");
                 break;
+            // SKIP and REDEAL are handled in fiveAlive.java
             case SKIP:
                 System.out.println("Next player is skipped!");
                 skipNextPlayer = true;
                 break;
             case REDEAL:
-                System.out.println("REDEAL card played! All players' hands are collected and reshuffled.");
+                System.out.println("All players' hands are collected and reshuffled.");
                 List<Card> allCards = new ArrayList<>();
             
                 // Collect all cards from players' hands
@@ -145,7 +148,7 @@ public class Table {
                 System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
                 break;
             case BOMB:
-                System.out.println("BOMB card played. Count is reseted to 0. All other players must immediately discard a ZERO.");
+                System.out.println("BOOM! Count is reset to 0. All other players must immediately discard a ZERO.");
                 count = 0;
                 bombCardPlayed = true;
         }
@@ -160,6 +163,9 @@ public class Table {
 
     public void discardCard(Card card){
         discardPack.addCard(card, 0);
+    }
+    public Card popCard(){ // remove top card from discard pack
+        return discardPack.pickCard(0, true);
     }
     public void resetCount(){
         count = 0;

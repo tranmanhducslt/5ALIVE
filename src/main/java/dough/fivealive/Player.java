@@ -26,21 +26,26 @@ public class Player{
             System.out.println(name + " has lost all their lives!");
         }
     }
+    // Method to play a card from the player's hand
     public void playCard(int index, Table table, List<Player> players) {
         Card playedCard = hand.pickCard(index, true);
         table.discardCard(playedCard);
         table.updateCount(playedCard, players);
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
-            System.out.println(name + " caused the table to exceed 21 and loses 1 life!");
+            System.out.println(name + " does not have a valid card and loses 1 life!");
             lostLive();
-            // Continue later
+            // return last played card from discard pack to them 
+            // (per rules, if can't play, don't play)
+            hand.addCard(table.popCard());
         }
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+    // Method to rename a player
     public void rename() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a new name: ");
@@ -67,19 +72,24 @@ public class Player{
         }
         return false;
     }
-    public void discardCard(cardType type, Table table) {
-        Iterator<Card> iterator = hand.getCards().iterator();
-        while (iterator.hasNext()) {
-            Card card = iterator.next();
+    
+    // Method to discard a card from the player's hand, returns true if successful
+    public boolean discardCard(cardType type, Table table) {
+        for (Card card : hand.getCards()) 
             if (card.getCardType() == type) {
-                iterator.remove();
+                hand.getCards().remove(card);
                 table.discardCard(card);
-                break;
+                return true;
             }
-        }
+        return false;
     }
-    // Clear a player's hand, useful for redeal card
+    
+    // Method to clear a player's hand, useful for redeal card
     public void clearHand() {
         hand.getCards().clear();
+    }
+
+    public boolean goOut() {
+        return hand.isEmpty();
     }
 }
