@@ -119,10 +119,15 @@ public class Table {
                 isClockwise = !isClockwise;
                 System.out.println("Play now proceeds in the opposite direction.");
                 break;
-            // SKIP and REDEAL are handled in fiveAlive.java
+            // SKIP and BOMB are handled in fiveAlive.java
             case SKIP:
                 System.out.println("Next player is skipped!");
                 skipNextPlayer = true;
+                break;
+            case BOMB:
+                System.out.println("BOOM! Count is reset to 0. All other players must immediately discard a ZERO.");
+                count = 0;
+                bombCardPlayed = true;
                 break;
             case REDEAL:
                 System.out.println("All players' hands are collected and reshuffled.");
@@ -146,11 +151,6 @@ public class Table {
                 }
                 count = 0;
                 System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
-                break;
-            case BOMB:
-                System.out.println("BOOM! Count is reset to 0. All other players must immediately discard a ZERO.");
-                count = 0;
-                bombCardPlayed = true;
         }
     }
     public boolean shouldSkipNextPlayer(){
