@@ -61,6 +61,7 @@ public class Player{
     public void addCard(Card card) {
         hand.addCard(card);
     }
+    //  Method for player's hand, to check if e.g. gone out
     public PackHand getHand() {
         return hand;
     }
@@ -87,9 +88,5 @@ public class Player{
     // Method to clear a player's hand, useful for redeal card
     public void clearHand() {
         hand.getCards().clear();
-    }
-
-    public boolean goOut() {
-        return hand.isEmpty();
     }
 }
