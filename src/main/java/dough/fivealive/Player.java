@@ -33,7 +33,7 @@ public class Player{
         table.updateCount(playedCard, players);
         // Check if the table count exceeds 21
         if (table.getCount() > 21) {
-            System.out.println(name + " does not have a valid card and loses 1 life!");
+            System.out.println(name + " has played an invalid card and loses 1 life!");
             lostLive();
             // return last played card from discard pack to them 
             // (per rules, if can't play, don't play)
