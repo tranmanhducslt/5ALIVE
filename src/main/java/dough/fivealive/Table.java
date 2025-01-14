@@ -46,13 +46,7 @@ public class Table {
         isClockwise = !isClockwise;
     }
     public static List<Player> removePlayer(List<Player> players, Player player, Table table) {
-        int playerIndex = players.indexOf(player);
         players.remove(player);
-
-        // Adjust index to point to the next player
-        if (playerIndex <= table.currentPlayerIndex) {
-            table.currentPlayerIndex--;  // Shift index back if needed
-        }
         return players;
     }
 
