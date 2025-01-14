@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class PlayerSetupController {
 
     @FXML
     private Button startGameButton;
+
+    @FXML
+    private Button returnMenuButton;
 
     // List to store player names
     private final List<TextField> playerNameFields = new ArrayList<>();
@@ -80,6 +84,23 @@ public class PlayerSetupController {
             stage.setTitle("Five Alive - Game");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void returnMenu(){
+        System.out.println("Returning to menu...");
+        try {
+            // Load setup scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+            Parent playerSetupRoot = loader.load();
+
+            Stage stage = (Stage) returnMenuButton.getScene().getWindow();
+            Scene playerSetupScene = new Scene(playerSetupRoot);
+            stage.setScene(playerSetupScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load MainMenu.fxml.");
         }
     }
 }
