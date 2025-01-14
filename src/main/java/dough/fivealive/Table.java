@@ -119,7 +119,7 @@ public class Table {
                 isClockwise = !isClockwise;
                 System.out.println("Play now proceeds in the opposite direction.");
                 break;
-            // SKIP and REDEAL are handled in fiveAlive.java
+            // SKIP and BOMB are handled in fiveAlive.java
             case SKIP:
                 System.out.println("Next player is skipped!");
                 skipNextPlayer = true;
