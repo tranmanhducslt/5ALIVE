@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #A9A9A9;" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.MainMenuController">
     <children>
         <HBox alignment="CENTER" layoutY="252.0" spacing="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="252.0">
             <children>
-                <Button focusTraversable="false" mnemonicParsing="false" prefHeight="190.0" prefWidth="130.0" rotate="-6.0" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                <Button fx:id="startSetupButton" focusTraversable="false" mnemonicParsing="false" onAction="#startSetupScreen" prefHeight="190.0" prefWidth="130.0" rotate="-6.0" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="193.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -19,7 +19,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button focusTraversable="false" mnemonicParsing="false" prefHeight="150.0" prefWidth="49.0" rotate="-3.9" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                <Button fx:id="startTutorialButton" focusTraversable="false" mnemonicParsing="false" onAction="#startTutorialScreen" prefHeight="150.0" prefWidth="49.0" rotate="-3.9" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="212.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -28,7 +28,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button focusTraversable="false" mnemonicParsing="false" prefHeight="150.0" prefWidth="49.0" rotate="1.8" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                <Button fx:id="startSettingsButton" focusTraversable="false" mnemonicParsing="false" onAction="#startSettingsScreen" prefHeight="150.0" prefWidth="49.0" rotate="1.8" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="201.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -37,7 +37,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button focusTraversable="false" mnemonicParsing="false" prefHeight="194.0" prefWidth="126.0" rotate="5.2" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                <Button fx:id="quitGameButton" focusTraversable="false" mnemonicParsing="false" onAction="#exitGame" prefHeight="194.0" prefWidth="126.0" rotate="5.2" style="-fx-padding: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="199.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -48,7 +48,14 @@
                 </Button>
             </children>
         </HBox>
-        <HBox alignment="CENTER" layoutX="722.0" layoutY="6.0" prefHeight="114.0" prefWidth="42.0" spacing="36.0" />
-        <HBox alignment="CENTER" layoutY="508.0" prefHeight="97.0" prefWidth="62.0" spacing="36.0" AnchorPane.bottomAnchor="-5.600000000000023" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="736.8" />
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="278.0" spacing="36.0">
+         <children>
+            <ImageView fitHeight="102.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/L-HORI.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

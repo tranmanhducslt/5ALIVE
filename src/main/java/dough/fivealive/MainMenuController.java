@@ -11,16 +11,19 @@ import java.io.IOException;
 
 public class MainMenuController {
     @FXML
-    private Button startButton;
+    private Button startSetupButton;
 
     @FXML
-    private Button settingsButton;
+    private Button startSettingsButton;
 
     @FXML
-    private Button exitButton;
+    private Button startTutorialButton;
 
     @FXML
-    public void startSetup() {
+    private Button quitGameButton;
+
+    @FXML
+    public void startSetupScreen() {
         System.out.println("Starting the game...");
 
         try {
@@ -28,7 +31,7 @@ public class MainMenuController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerSetup.fxml"));
             Parent playerSetupRoot = loader.load();
 
-            Stage stage = (Stage) startButton.getScene().getWindow();
+            Stage stage = (Stage) startSetupButton.getScene().getWindow();
             Scene playerSetupScene = new Scene(playerSetupRoot);
             stage.setScene(playerSetupScene);
         } catch (IOException e) {
@@ -37,7 +40,12 @@ public class MainMenuController {
         }
     }
 
-    public void startSettings() {
+    public void startTutorialScreen() {
+        System.out.println("Opening tutorial...");
+        // Transition to settings screen
+    }
+
+    public void startSettingsScreen() {
         System.out.println("Opening settings...");
         // Transition to settings screen
     }

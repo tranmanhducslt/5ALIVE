@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298);" prefHeight="720.0" prefWidth="1080.0">
+<VBox alignment="CENTER" prefHeight="768.0" prefWidth="1024.0" spacing="20.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label text="Game Screen" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="Game Screen" />
         <!-- Add game-related UI components here -->
     </children>
 </VBox>
