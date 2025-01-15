@@ -15,7 +15,8 @@ public class fiveAlive {
         Table table = new Table(players);
         while (true) { // Main game loop
             Player currentPlayer = table.getCurrentPlayer(players);  // Get the current player
-           // Check if the player lost
+            
+            // Check if the player lost
             if (currentPlayer.isLost()) {
                 System.out.println(currentPlayer.getName() + " has lost all their lives!");
                 players = table.removePlayer(players, currentPlayer, table); 
