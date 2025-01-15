@@ -16,12 +16,18 @@ public class fiveAlive {
         while (true) { // Main game loop
             Player currentPlayer = table.getCurrentPlayer(players);  // Get the current player
             
+            // Check if there is only one player left
+            if (players.size() == 1) {
+                System.out.println("Game over! " + players.get(0).getName() + " wins!");
+                break;
+            }
             // Check if the player lost
             if (currentPlayer.isLost()) {
-                System.out.println(currentPlayer.getName() + " has lost all their lives!");
-                players = table.removePlayer(players, currentPlayer, table); 
+                Player thisPlayer = currentPlayer;
                 table.nextPlayer(players);
-                continue;
+                currentPlayer = table.getCurrentPlayer(players);
+                System.out.println(currentPlayer.getName() + " has lost all their lives!");
+                players = table.removePlayer(players, thisPlayer, table); 
             }
             
             // Handle player's turn
@@ -75,22 +81,9 @@ public class fiveAlive {
                 }
             }
 
-
-            // Check if the player lost
-            if (currentPlayer.isLost()) {
-                System.out.println(currentPlayer.getName() + " has lost all their lives!");
-                players = table.removePlayer(players, currentPlayer, table); // write a method to remove player from the arraylist
-                continue;
-            }
-
             // Move to next player
             table.nextPlayer(players);
-
-            // Check if there is only one player left
-            if (players.size() == 1) {
-                System.out.println("Game over! " + players.get(0).getName() + " wins!");
-                break;
-            }
+   
         }
         
         scanner.close();
