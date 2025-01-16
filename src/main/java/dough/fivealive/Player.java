@@ -90,7 +90,7 @@ public class Player{
         return false;
     }
     
-    // Method to clear a player's hand, useful for redeal card
+    // Method to clear a player's hand, useful for REDEAL
     public void clearHand() {
         hand.getCards().clear();
     }
