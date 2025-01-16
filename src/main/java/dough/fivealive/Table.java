@@ -6,9 +6,9 @@ public class Table {
     private PackDraw drawPack;
     private PackDiscard discardPack;
     private int currentPlayerIndex; // keep track of whose turn it is
-    private boolean isClockwise;
-    private boolean skipNextPlayer;
-    private boolean bombCardPlayed;
+    private boolean isClockwise; // Flag for direction of play
+    private boolean skipNextPlayer; // Flag for the four Skip cards 
+    private boolean bombCardPlayed; // Flag to check if the Bomb card was played
 
     // Constructor, also to reset every new round
     public Table(List<Player> players) {
@@ -20,8 +20,8 @@ public class Table {
         this.currentPlayerIndex = 0;
         this.count = 0;
         this.isClockwise = true;
-        this.skipNextPlayer = false; // Flag for the 4 Skip cards 
-        this.bombCardPlayed = false; // Flag to check if the Bomb card was played
+        this.skipNextPlayer = false; 
+        this.bombCardPlayed = false; 
         this.drawPack = new PackDraw();
         this.discardPack = new PackDiscard();
         dealCards(players);
@@ -39,7 +39,6 @@ public class Table {
         else{
             currentPlayerIndex = (currentPlayerIndex - 1 + players.size()) % players.size();
         }
-        
     }
 
     public void reverseDirection() {
