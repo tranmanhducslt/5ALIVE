@@ -74,16 +74,6 @@ public class Table {
     // Method to update the count when a player plays a card
     public void updateCount(Card card, List<Player> players) {
         switch(card.getCardType()){
-            case ZERO:
-            case ONE:
-            case TWO:
-            case THREE:
-            case FOUR:
-            case FIVE:
-            case SIX:
-            case SEVEN:
-                count += card.getCardType().ordinal();
-                break;
             case EQ_21:
                 count = 21;
                 break;
@@ -149,6 +139,9 @@ public class Table {
                 }
                 count = 0;
                 System.out.println("All hands reshuffled and dealt. Count is reset to 0.");
+                break;
+            default: // Number cards (0-7)
+                count += card.getCardType().ordinal();
         }
     }
     public boolean shouldSkipNextPlayer(){
