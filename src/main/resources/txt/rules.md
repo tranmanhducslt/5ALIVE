@@ -12,10 +12,10 @@ The first player in the list always goes first! Start by placing one of your car
 ## On your turn
 Place a card on the discard pile.
 
-* If it’s a number, it's added to the table total. If the total remains under 21, your turn is over—you stayed ALIVE! 
-* If it’s a WILD card, follow the instructions for that card. See below for more details.
-* If you play a card that takes the total over 21, you lose one of your Lives! The card is then returned to you. The running total resets to zero, and all players continue to play from their hand. The next player starts play again with a new card from their hand.
-* If it’s your last card, the hand is over. All other players must lose a Life. The deck is reshuffled and a new hand begins.
+* **If it’s a number,** it's added to the table total. If the total remains under 21, your turn is over—you stayed ALIVE! 
+* **If it’s a WILD card,** follow the instructions for that card. See below for more details.
+* **If you play a card that takes the total over 21,** you lose one of your Lives! The card is then returned to you. The running total resets to zero, and all players continue to play from their hand. The next player starts play again with a new card from their hand.
+* **If it’s your last card,** the hand is over. All other players must lose a Life. The deck is reshuffled and a new hand begins.
 
 ## WILD cards
 A WILD Card is a great way to avoid losing a life. They can be played at any time, not just when the total reaches 21. 
@@ -29,4 +29,4 @@ A WILD Card is a great way to avoid losing a life. They can be played at any tim
 * **BOMB:** All other players must immediately discard a 0. If they can’t they must lose a Life. The running total resets to 0. <em>Other WILD cards with a value of 0 cannot be substituted.</em> 
 
 ## How to win
-Be the last player to have Lives remaining. Players who've lost all their Lives are eliminated until there's only one player left!
+**Be the last player to have Lives remaining.** Players who've lost all their Lives are eliminated until there's only one player left!
