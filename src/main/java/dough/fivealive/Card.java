@@ -2,6 +2,7 @@
  * Author: Duc Tran [1589830]
  * Purpose: To represent a single card in the game
 */
+
 package dough.fivealive;
 
 enum cardType{ // types of cards

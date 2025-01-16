@@ -2,6 +2,7 @@
  * Author: Phuong Nguyen [ID]
  * Purpose: The main file for the whole application
 */
+
 package dough.fivealive;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

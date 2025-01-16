@@ -2,6 +2,7 @@
  * Author: Nhu Nguyen [ID], Phuong Nguyen [ID]
  * Purpose: To represent the main game logic
 */
+
 package dough.fivealive;
 import java.util.*;
 public class fiveAlive {

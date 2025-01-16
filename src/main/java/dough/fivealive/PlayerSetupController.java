@@ -2,6 +2,7 @@
  * Author: Phuong Nguyen [ID]
  * Purpose: For the player setup screen
 */
+
 package dough.fivealive;
 
 import javafx.fxml.FXML;
