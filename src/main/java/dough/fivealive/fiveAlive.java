@@ -28,7 +28,7 @@ public class fiveAlive {
                 currentPlayer = table.getCurrentPlayer(players);
                 System.out.println(currentPlayer.getName() + " has lost all their lives!");
                 players = table.removePlayer(players, thisPlayer, table);
-               if (players.size() == 1) {
+                if (players.size() == 1) {
                     System.out.println("Game over! " + players.get(0).getName() + " wins!");
                     break;
                 }
