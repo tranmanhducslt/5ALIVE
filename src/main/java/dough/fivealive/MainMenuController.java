@@ -1,3 +1,7 @@
+/* 
+ * Author: Phuong Nguyen [ID]
+ * Purpose: For the main menu screen
+*/
 package dough.fivealive;
 
 import javafx.fxml.FXML;

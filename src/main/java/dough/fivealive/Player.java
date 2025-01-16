@@ -1,3 +1,7 @@
+/* 
+ * Author: Duc Tran [1589830], Nhu Nguyen [ID], Phuong Nguyen [ID]
+ * Purpose: To represent a single player in the game
+*/
 package dough.fivealive;
 import java.util.*;
 
