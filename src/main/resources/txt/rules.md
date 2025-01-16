@@ -24,7 +24,7 @@ A WILD Card is a great way to avoid losing a life. They can be played at any tim
 * **PASS:** Play passes to the next player in rotation.
 * **REVERSE:** Play now proceeds in the opposite direction. <em>If only 2 players are left, this counts as a PASS card.</em>
 * **SKIP:** The next player is skipped. <em>If only 2 players are left, the one who played the card gets another turn.</em> 
-* **=0/=10/=21:** Brings the running total to the indicated amount.
+* **=21/=10/=0:** Brings the running total to the indicated amount.
 * **REDEAL:** All players' cards are gathered and shuffled, then dealt again in the current direction of play. The running total resets to 0, and play continues as normal. <em>If this card is played as the last card in someone’s hand, the round is over.</em> 
 * **BOMB:** All other players must immediately discard a 0. If they can’t they must lose a Life. The running total resets to 0. <em>Other WILD cards with a value of 0 cannot be substituted.</em> 
 
