@@ -45,18 +45,15 @@ public class MainMenuController {
         System.out.println("Opening tutorial...");
 
         try {
-            // load instructions scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/Instructions.fxml"));
-            Parent instructionsRoot = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/TutorialScreen.fxml"));
+            Parent tutorialRoot = loader.load();
 
-            Stage stage = new Stage();
-            Scene instructionsScene = new Scene(instructionsRoot);
-            stage.setScene(instructionsScene);
-            stage.setTitle("Instructions");
-            stage.show();
+            Stage stage = (Stage) startTutorialButton.getScene().getWindow();
+            Scene tutorialScene = new Scene(tutorialRoot);
+            stage.setScene(tutorialScene);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load Instructions.fxml.");
+            System.out.println("Failed to load TutorialScreen.fxml.");
         }
     }
 

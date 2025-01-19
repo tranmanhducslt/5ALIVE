@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="768.0" prefWidth="1024.0" spacing="20.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.TutorialController" alignment="CENTER">
+    <!-- Title Section -->
+    <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="How to Play" />
+
+    <!-- Scrollable Content Section -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <content>
+            <VBox spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10;">
+                <!-- Object of the game -->
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Object of the Game" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="Avoid letting the table's value go over 21. Each time you do, you must lose a Life. Once you lose all five Lives, you're out—the last player standing wins!" wrapText="true" />
+
+                <!-- Rules of the game -->
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Rules of the Game" />
+
+                <!-- Get Ready -->
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Get Ready" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="The deck is shuffled and each player is dealt 10 cards. It's okay to look at your own cards, but don't let anyone else peek." wrapText="true" />
+
+                <!-- Let's Play -->
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Let's Play!" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="The first player in the list always goes first! Start by placing one of your cards faceup next to the deck. This is the discard pile. Play then continues clockwise, and players take turns playing a card on the pile, trying not to go over 21." wrapText="true" />
+
+                <!-- On Your Turn -->
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="On Your Turn" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="Place a card on the discard pile." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• If it’s a number, it's added to the table total. If the total remains under 21, your turn is over—you stayed ALIVE!" wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• If it’s a WILD card, follow the instructions for that card. See below for more details." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• If you play a card that takes the total over 21, you lose one of your Lives! The card is then returned to you. The running total resets to zero, and all players continue to play from their hand. The next player starts play again with a new card from their hand." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• If it’s your last card, the hand is over. All other players must lose a Life. The deck is reshuffled and a new hand begins." wrapText="true" />
+
+                <!-- WILD Cards -->
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="WILD Cards" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="A WILD Card is a great way to avoid losing a life. They can be played at any time, not just when the total reaches 21." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• +1/+2: All other players pick up the indicated number of cards from the draw pile." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• PASS: Play passes to the next player in rotation." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• REVERSE: Play now proceeds in the opposite direction. If only 2 players are left, this counts as a PASS card." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• SKIP: The next player is skipped. If only 2 players are left, the one who played the card gets another turn." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• =21/=10/=0: Brings the running total to the indicated amount." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• REDEAL: All players' cards are gathered and shuffled, then dealt again in the current direction of play. The running total resets to 0, and play continues as normal. If this card is played as the last card in someone’s hand, the round is over." wrapText="true" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="• BOMB: All other players must immediately discard a 0. If they can’t, they must lose a Life. The running total resets to 0. Other WILD cards with a value of 0 cannot be substituted." wrapText="true" />
+
+                <!-- How to Win -->
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="How to Win" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="Be the last player to have Lives remaining. Players who've lost all their Lives are eliminated until there's only one player left!" wrapText="true" />
+            </VBox>
+        </content>
+    </ScrollPane>
+
+    <!-- Return Button Section -->
+    <Button fx:id="returnMenuButton" style="-fx-background-color: #333333; -fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10;" text="Return to Menu" onAction="#returnMenuScreen" />
+</VBox>
