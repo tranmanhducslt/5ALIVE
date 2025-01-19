@@ -1,3 +1,7 @@
+/* 
+ * Author: Duc Tran [1589830]
+ * Purpose: Window for game instructions
+*/
 package dough.fivealive;
 
 import javafx.fxml.FXML;
