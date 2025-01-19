@@ -1,8 +1,3 @@
-/* 
- * Author: Phuong Nguyen [ID]
- * Purpose: For the main menu screen
-*/
-
 package dough.fivealive;
 
 import javafx.fxml.FXML;
@@ -33,7 +28,7 @@ public class MainMenuController {
 
         try {
             // load setup scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerSetup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/PlayerSetup.fxml"));
             Parent playerSetupRoot = loader.load();
 
             Stage stage = (Stage) startSetupButton.getScene().getWindow();
@@ -45,16 +40,33 @@ public class MainMenuController {
         }
     }
 
+    @FXML
     public void startTutorialScreen() {
         System.out.println("Opening tutorial...");
-        // Transition to settings screen
+
+        try {
+            // load instructions scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/Instructions.fxml"));
+            Parent instructionsRoot = loader.load();
+
+            Stage stage = new Stage();
+            Scene instructionsScene = new Scene(instructionsRoot);
+            stage.setScene(instructionsScene);
+            stage.setTitle("Instructions");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load Instructions.fxml.");
+        }
     }
 
+    @FXML
     public void startSettingsScreen() {
         System.out.println("Opening settings...");
         // Transition to settings screen
     }
 
+    @FXML
     public void exitGame() {
         System.out.println("Exiting game...");
         System.exit(0);
