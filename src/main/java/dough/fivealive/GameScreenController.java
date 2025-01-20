@@ -68,9 +68,9 @@ public class GameScreenController {
         }
     }
 
-    private void updatePlayerHand(List<Card> hand) {
+    private void updatePlayerHand(PackHand hand) {
         playerHandContainer.getChildren().clear();
-        for (Card card : hand) {
+        for (Card card : hand.getCards()) {
             // Construct the image path based on card name
             String imagePath = "../resources/img/C-" + card.getCardType().name() + ".png";
             ImageView cardImage = new ImageView(imagePath);
