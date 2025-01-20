@@ -77,9 +77,9 @@ public class PlayerSetupController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/GameScreen.fxml"));
             Parent gameRoot = loader.load();
 
-            // Get the controller for the game screen (if needed to pass data)
-            // GameScreenController controller = loader.getController();
-            // controller.initializeGame(playerNames);
+            // Pass player names to the game screen controller
+            GameScreenController controller = loader.getController();
+            controller.initializeGame(playerNames);
 
             // Switch to the game screen
             Stage stage = (Stage) playerNamesContainer.getScene().getWindow();
