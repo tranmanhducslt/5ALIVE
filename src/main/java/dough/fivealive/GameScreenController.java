@@ -1,3 +1,8 @@
+/* 
+ * Author: Phuong Nguyen [ID]
+ * Purpose: For the game screen
+*/
+
 package dough.fivealive;
 
 import javafx.fxml.FXML;

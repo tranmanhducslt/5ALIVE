@@ -1,3 +1,8 @@
+/* 
+ * Author: Duc Tran [1589830], Phuong Nguyen [ID]
+ * Purpose: To control the main menu screen
+*/
+
 package dough.fivealive;
 
 import javafx.fxml.FXML;

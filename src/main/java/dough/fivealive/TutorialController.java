@@ -1,3 +1,8 @@
+/* 
+ * Author: Phuong Nguyen [ID]
+ * Purpose: Tutorial screen
+*/
+
 package dough.fivealive;
 
 import javafx.event.ActionEvent;
