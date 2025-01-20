@@ -14,17 +14,4 @@ public class Card {
     public cardType getCardType(){ return type; }
     public void setCardType(cardType type){ this.type = type; }
     public Card(cardType type){ setCardType(type); }
-    private Image cardImage;
-    private static Image backImage = new Image(Card.class.getResourceAsStream("../resources/img/C-BACK.png"));
-    public Image getImage(){
-        // load card image only when needed
-        if(cardImage == null)
-            cardImage = new Image(
-                Card.class.getResourceAsStream(("../resources/img/C-" + getCardType() + ".png")));
-        return cardImage;
-    }
-
-    public static Image getBackImage(){
-        return backImage;
-    }
 }
