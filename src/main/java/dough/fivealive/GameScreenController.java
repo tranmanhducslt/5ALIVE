@@ -18,7 +18,7 @@ public class GameScreenController {
     private Label currentPlayerLabel; // Label to display the current player's turn
 
     @FXML
-    private VBox playersContainer; // VBox to display other players' information
+    private VBox otherPlayersContainer; // VBox to display other players' information
 
     @FXML
     private HBox playerLivesContainer; // HBox to display "Five Alive" cards (lives)
@@ -30,6 +30,10 @@ public class GameScreenController {
     private List<Player> players; // List of players in the game
 
     public void initializeGame(List<String> playerNames) {
+        if (otherPlayersContainer == null) {
+            System.out.println("Error: playersContainer is null. Check GameScreen.FXML file.");
+            return;
+        }
         // Initialize players and table
         players = new ArrayList<>();
         for (String name : playerNames) {
@@ -61,19 +65,22 @@ public class GameScreenController {
     private void updatePlayerLives(int lives) {
         playerLivesContainer.getChildren().clear();
         for (int i = 0; i < lives; i++) {
-            ImageView lifeCard = new ImageView("/path/to/life_card_image.png");
+            ImageView lifeCard = new ImageView(getClass().getResource("/img/C-BACK.png").toExternalForm());
             lifeCard.setFitWidth(50);
             lifeCard.setFitHeight(70);
             playerLivesContainer.getChildren().add(lifeCard);
         }
     }
 
-    private void updatePlayerHand(List<Card> hand) {
+    private void updatePlayerHand(PackHand hand) {
         playerHandContainer.getChildren().clear();
-        for (Card card : hand) {
+
+        // Get the list of cards from the player's hand
+        List<Card> cards = hand.getCards();
+        for (Card card : cards) {
             // Construct the image path based on card name
-            String imagePath = "../resources/img/C-" + card.getCardType().name() + ".png";
-            ImageView cardImage = new ImageView(imagePath);
+            String imagePath = "/img/C-" + card.getCardType().name() + ".png";
+            ImageView cardImage = new ImageView(getClass().getResource(imagePath).toExternalForm());
 
             cardImage.setFitWidth(70);
             cardImage.setFitHeight(100);
@@ -86,10 +93,10 @@ public class GameScreenController {
 
 
     private void updatePlayersContainer() {
-        playersContainer.getChildren().clear();
+        otherPlayersContainer.getChildren().clear();
         for (Player player : players) {
             Label playerLabel = new Label(player.getName() + " - Lives: " + player.getLives());
-            playersContainer.getChildren().add(playerLabel);
+            otherPlayersContainer.getChildren().add(playerLabel);
         }
     }
 
