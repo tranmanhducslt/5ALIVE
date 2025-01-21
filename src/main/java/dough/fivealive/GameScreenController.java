@@ -79,7 +79,7 @@ public class GameScreenController {
             ImageView cardImage = new ImageView(getClass().getResource(imagePath).toExternalForm());
 
             cardImage.setFitWidth(70);
-            cardImage.setFitHeight(100);
+            cardImage.setFitHeight(105);
 
             // Add click event with the card's index
             int index = i;
