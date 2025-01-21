@@ -32,7 +32,7 @@ public class Player{
         }
     }
     // Method to play a card from the player's hand
-    public void playCard(int index, Table table, List<Player> players) {
+    public Card playCard(int index, Table table, List<Player> players) {
         Card playedCard = hand.pickCard(index, true);
         table.discardCard(playedCard);
         table.updateCount(playedCard, players);
@@ -44,6 +44,7 @@ public class Player{
             // (per rules, if can't play, don't play)
             hand.addCard(table.popCard());
         }
+        return playedCard;
     }
 
     public void setName(String name) {

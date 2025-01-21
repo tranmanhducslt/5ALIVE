@@ -7,6 +7,7 @@ package dough.fivealive;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,10 +27,10 @@ public class GameScreenController {
     private VBox otherPlayersContainer; // VBox to display other players' information
 
     @FXML
-    private HBox playerLivesContainer; // HBox to display "Five Alive" cards (lives)
+    private HBox playerHandContainer; // HBox to display the player's hand of cards
 
     @FXML
-    private HBox playerHandContainer; // HBox to display the player's hand of cards
+    private ImageView recentlyPlayedCardImage;
 
     private Table table; // Game table to manage the state
     private List<Player> players; // List of players in the game
@@ -55,11 +56,10 @@ public class GameScreenController {
     }
 
     private void updateGameState() {
-        // Update UI to reflect the current game state
         Player currentPlayer = table.getCurrentPlayer(players);
+        System.out.println(currentPlayer.getName() + "'s lives: " + currentPlayer.getLives()); // debug
         updateCurrentPlayer(currentPlayer);
-        updatePlayerLives(currentPlayer.getLives());
-        updatePlayerHand(currentPlayer.getHand());
+        updatePlayerHand(currentPlayer.getHand()); // Refresh the hand
         currentCountLabel.setText("Current Count: " + table.getCount());
     }
 
@@ -67,32 +67,25 @@ public class GameScreenController {
         currentPlayerLabel.setText("Current Player: " + player.getName());
     }
 
-    private void updatePlayerLives(int lives) {
-        playerLivesContainer.getChildren().clear();
-        for (int i = 0; i < lives; i++) {
-            ImageView lifeCard = new ImageView(getClass().getResource("/img/C-BACK.png").toExternalForm());
-            lifeCard.setFitWidth(50);
-            lifeCard.setFitHeight(70);
-            playerLivesContainer.getChildren().add(lifeCard);
-        }
-    }
-
     private void updatePlayerHand(PackHand hand) {
         playerHandContainer.getChildren().clear();
 
-        // Get the list of cards from the player's hand
         List<Card> cards = hand.getCards();
-        for (Card card : cards) {
+        for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
+
             // Construct the image path based on card name
             String imagePath = "/img/C-" + card.getCardType().name() + ".png";
             ImageView cardImage = new ImageView(getClass().getResource(imagePath).toExternalForm());
 
             cardImage.setFitWidth(70);
             cardImage.setFitHeight(100);
-            playerHandContainer.getChildren().add(cardImage);
 
-            // Add click event to cards
-            cardImage.setOnMouseClicked(event -> handleCardPlay(card));
+            // Add click event with the card's index
+            int index = i;
+            cardImage.setOnMouseClicked(event -> handleCardPlay(index));
+
+            playerHandContainer.getChildren().add(cardImage);
         }
     }
 
@@ -101,15 +94,24 @@ public class GameScreenController {
         otherPlayersContainer.getChildren().clear();
         for (Player player : players) {
             Label playerLabel = new Label(player.getName() + " - Lives: " + player.getLives());
+            playerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #444444; "
+                    + "-fx-padding: 5 10; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 5; "
+                    + "-fx-background-radius: 5;");
+            playerLabel.setMinWidth(200);
+            playerLabel.setMaxWidth(400);
+            playerLabel.setWrapText(true); // Enable wrapping if needed
             otherPlayersContainer.getChildren().add(playerLabel);
         }
     }
 
-    private void handleCardPlay(Card card) {
+    private void handleCardPlay(int index) {
         Player currentPlayer = table.getCurrentPlayer(players);
 
-        // Play the card
-        // currentPlayer.playCard(card, table, players);
+        Card playedCard = currentPlayer.playCard(index, table, players);
+        if (playedCard != null) {
+            String imagePath = "/img/C-" + playedCard.getCardType().name() + ".png";
+            recentlyPlayedCardImage.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+        }
 
         // Update count and check for exceeding 21
         if (table.getCount() > 21) {
@@ -129,11 +131,11 @@ public class GameScreenController {
             table.resetBombFlag();
         }
 
-        // Check for player losing
         if (currentPlayer.isLost()) {
             System.out.println(currentPlayer.getName() + " has lost all their lives!");
             players = table.removePlayer(players, currentPlayer, table);
         }
+        updatePlayersContainer();
 
         // Check if only one player remains
         if (players.size() == 1) {

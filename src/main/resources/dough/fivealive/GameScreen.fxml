@@ -2,43 +2,38 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.GameScreenController" prefWidth="1024" prefHeight="768">
-    <children>
-        <!-- Main Layout Container -->
-        <VBox spacing="10.0" style="-fx-background-color: #A9A9A9;" alignment="TOP_CENTER">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #555555;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.GameScreenController">
+   <children>
 
-            <!-- Top Section: Game Information -->
-            <VBox alignment="CENTER" spacing="10.0">
-                <Label fx:id="currentCountLabel" text="Current Count: 0" style="-fx-font-size: 18px; -fx-text-fill: white;" />
-                <Label fx:id="currentPlayerLabel" text="Current Player: Player 1" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-            </VBox>
+      <!-- Middle Section: Current Player's Info -->
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="6.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #777777;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.799999999999955" AnchorPane.topAnchor="6.0">
+         <children>
+            <Label fx:id="currentPlayerLabel" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;" text="Player 1's Turn!" />
+            <Label fx:id="currentCountLabel" style="-fx-font-size: 20px; -fx-text-fill: white;" text="Count: 0" />
+         </children>
+      </VBox>
 
-            <!-- Middle Section: Other Players Information -->
-            <VBox fx:id="otherPlayersContainer" alignment="CENTER" spacing="10.0" maxWidth="800">
-                <Label text="Other Players:" style="-fx-font-size: 18px; -fx-text-fill: white;" />
-                <!-- Dynamically generated player information will be added here -->
-            </VBox>
+      <!-- Center Section: Recently Played Card -->
+      <VBox alignment="CENTER" prefHeight="255.0" prefWidth="454.0" spacing="10.0" style="-fx-background-color: #888888; -fx-padding: 20; -fx-border-color: white; -fx-border-width: 2;" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="250.0">
+         <children>
+            <ImageView fx:id="recentlyPlayedCardImage" fitHeight="210.0" fitWidth="150.0" />
+         </children>
+      </VBox>
 
-            <!-- Bottom Section: Player's Lives and Cards -->
-            <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #333333; -fx-padding: 20;">
-                <!-- Player's Lives -->
-                <HBox fx:id="playerLivesContainer" spacing="10.0" alignment="CENTER">
-                    <Label text="Five Alive Cards:" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                    <!-- Dynamically generated "Five Alive" cards will be added here -->
-                </HBox>
-
-                <!-- Player's Hand -->
-                <VBox spacing="10.0" alignment="CENTER">
-                    <Label text="Your Hand:" style="-fx-font-size: 16px; -fx-text-fill: white;" />
-                    <HBox fx:id="playerHandContainer" spacing="10.0" alignment="CENTER">
-                        <!-- Dynamically generated card images will be added here -->
-                    </HBox>
-                </VBox>
-            </VBox>
-        </VBox>
-    </children>
-</StackPane>
+      <!-- Bottom Section: Player's Hand -->
+      <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #444444; -fx-padding: 10; -fx-border-color: white; -fx-border-width: 2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <HBox fx:id="playerHandContainer" alignment="CENTER" spacing="10.0">
+               <!-- Dynamically generated card images will appear here -->
+            </HBox>
+         </children>
+      </VBox>
+      <!-- Top Section: Other Players -->
+      <VBox fx:id="otherPlayersContainer" alignment="CENTER" layoutX="761.0" layoutY="131.0" prefHeight="15.0" prefWidth="250.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #555555;">
+      </VBox>
+   </children>
+</AnchorPane>
