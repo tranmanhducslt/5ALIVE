@@ -1,5 +1,5 @@
 /* 
- * Author: Phuong Nguyen [ID]
+ * Author: Phuong Nguyen [ID], Nhu Nguyen [ID]
  * Purpose: For the game screen
 */
 
