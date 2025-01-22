@@ -131,11 +131,35 @@ public class GameScreenController {
             table.resetBombFlag();
         }
 
+        // Check if the current player has lost all lives
         if (currentPlayer.isLost()) {
             System.out.println(currentPlayer.getName() + " has lost all their lives!");
             players = table.removePlayer(players, currentPlayer, table);
+
+            // Check if only one player remains
+            if (players.size() == 1) {
+                currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
+                return;
+            }
+
+            updatePlayersContainer(); // Update players display
         }
-        updatePlayersContainer();
+
+        // Check if anyone went out (played all cards)
+        for (Player player : players) {
+            if (player.getHand().isEmpty()) {
+                System.out.println(player.getName() + " has gone out! All other players lose 1 life.");
+                for (Player otherPlayer : players) {
+                    if (otherPlayer != player) {
+                        otherPlayer.lostLive();
+                    }
+                }
+                table = new Table(players); // Reset the table
+                break; // Exit the loop once the table is reset
+            }
+        }
+
+        updatePlayersContainer(); // Update players after checking who went out
 
         // Check if only one player remains
         if (players.size() == 1) {
