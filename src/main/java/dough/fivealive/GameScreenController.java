@@ -108,6 +108,27 @@ public class GameScreenController {
         Player currentPlayer = table.getCurrentPlayer(players);
 
         Card playedCard = currentPlayer.playCard(index, table, players);
+
+        // Check if only one player remains
+        if (players.size() == 1) {
+            currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
+            return;
+        }
+        updatePlayersContainer();
+        // Check if the current player has lost all lives
+        if (currentPlayer.isLost()) {
+            System.out.println(currentPlayer.getName() + " has lost all their lives!");
+            players = table.removePlayer(players, currentPlayer, table);
+
+            // Check if only one player remains
+            if (players.size() == 1) {
+                currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
+                return;
+            }
+
+            updatePlayersContainer(); // Update players display
+        }
+        
         if (playedCard != null) {
             String imagePath = "/img/C-" + playedCard.getCardType().name() + ".png";
             recentlyPlayedCardImage.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
