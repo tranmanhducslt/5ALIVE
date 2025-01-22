@@ -121,7 +121,7 @@ public class GameScreenController {
             table.nextPlayer(players);
             currentPlayer = table.getCurrentPlayer(players);
             System.out.println(thisPlayer.getName() + " has lost all their lives!");
-            players = table.removePlayer(players, currentPlayer, table);
+            players = table.removePlayer(players, thisPlayer, table);
 
             // Check if only one player remains
             if (players.size() == 1) {
@@ -163,16 +163,21 @@ public class GameScreenController {
         updatePlayersContainer();
         // Check if the current player has lost all lives
         if (currentPlayer.isLost()) {
-            System.out.println(currentPlayer.getName() + " has lost all their lives!");
-            players = table.removePlayer(players, currentPlayer, table);
+            Player thisPlayer = currentPlayer;
+            table.nextPlayer(players);
+            System.out.println(thisPlayer.getName() + " has lost all their lives!");
+            players = table.removePlayer(players, thisPlayer, table);
 
             // Check if only one player remains
             if (players.size() == 1) {
                 currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
                 return;
             }
-
             updatePlayersContainer(); // Update players display
+        }
+        else {
+            // Move to the next turn
+            nextPlayer();
         }
 
         // Check if anyone went out (played all cards)
@@ -190,9 +195,7 @@ public class GameScreenController {
         }
 
         updatePlayersContainer(); // Update players after checking who went out
-
-        // Move to the next turn
-        nextPlayer();
+        
     }
 
     private void handleBombCard(Player currentPlayer) {
