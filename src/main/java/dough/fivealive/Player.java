@@ -27,9 +27,11 @@ public class Player{
     }
     public void lostLive() {
         this.lives--;
+        /* 
         if (this.lives <= 0) {
             System.out.println(name + " has lost all their lives!");
         }
+        */
     }
     // Method to play a card from the player's hand
     public Card playCard(int index, Table table, List<Player> players) {

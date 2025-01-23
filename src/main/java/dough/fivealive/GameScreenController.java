@@ -5,12 +5,14 @@
 
 package dough.fivealive;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +48,11 @@ public class GameScreenController {
                                           .collect(Collectors.toList());
         game = new fiveAlive(players);
 
+        // Set the UI update callback
+        game.setUiUpdateCallback((Void) -> {
+            Platform.runLater(this::refreshUI);
+        });
+
         // Debug
         System.out.println("Game initialized with players: " + playerNames);
 
@@ -66,6 +73,13 @@ public class GameScreenController {
         currentPlayerLabel.setText("Current Player: " + player.getName());
     }
 
+    @FXML
+    private void handleCardClick(MouseEvent event) {
+        ImageView clickedCard = (ImageView) event.getSource();
+        int cardIndex = playerHandContainer.getChildren().indexOf(clickedCard);
+        game.playCard(cardIndex);
+    }
+
     private void updatePlayerHand(PackHand hand) {
         playerHandContainer.getChildren().clear();
 
@@ -79,6 +93,9 @@ public class GameScreenController {
 
             cardImage.setFitWidth(70);
             cardImage.setFitHeight(105);
+
+            // Add event handler for card click
+            cardImage.setOnMouseClicked(this::handleCardClick);
 
             playerHandContainer.getChildren().add(cardImage);
         }
