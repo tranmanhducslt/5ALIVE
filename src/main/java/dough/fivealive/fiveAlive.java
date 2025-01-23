@@ -1,25 +1,33 @@
 /* 
- * Author: Nhu Nguyen [ID], Phuong Nguyen [ID]
+ * Author: Duc Tran [1589830], Nhu Nguyen [ID], Phuong Nguyen [ID]
  * Purpose: To represent the main game logic
 */
 
 package dough.fivealive;
 import java.util.*;
 public class fiveAlive {
-   public static void main(String[] args) {
+    private List<Player> players;
+    private Player currentPlayer;
+    private Table table;
+    public Player getCurrentPlayer(){
+        return currentPlayer;
+    }
+    public int getCount(){
+        return table.getCount();
+    }
+    public Card getRecentlyPlayedCard(){
+        return table.getRecentlyPlayedCard();
+    }
+    public List<Player> getPlayers(){
+        return players;
+    }
+    public fiveAlive(List<Player> playerInput) {
         System.out.println("fiveAlive");
-        List<Player> players = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter number of players: ");
-        int numPlayers = scanner.nextInt();
-        for (int i = 0; i < numPlayers; i++) {
-            System.out.print("Enter player " + (i + 1) + " name: ");
-            String name = scanner.next();
-            players.add(new Player(name));
-        }
-        Table table = new Table(players);
+        players = playerInput;
+        table = new Table(players);
         while (true) { // Main game loop
-            Player currentPlayer = table.getCurrentPlayer(players);  // Get the current player
+            currentPlayer = table.getCurrentPlayer(players);  // Get the current player
             
             // Check if there is only one player left
             if (players.size() == 1) {
@@ -32,7 +40,7 @@ public class fiveAlive {
                 table.nextPlayer(players);
                 currentPlayer = table.getCurrentPlayer(players);
                 System.out.println(currentPlayer.getName() + " has lost all their lives!");
-                players = table.removePlayer(players, thisPlayer, table);
+                players = Table.removePlayer(players, thisPlayer, table);
                 if (players.size() == 1) {
                     System.out.println("Game over! " + players.get(0).getName() + " wins!");
                     break;

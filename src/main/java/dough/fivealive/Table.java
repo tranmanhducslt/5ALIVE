@@ -172,4 +172,9 @@ public class Table {
     public int getCount() {
         return count;
     }
+
+    // Top card of discard pack
+    public Card getRecentlyPlayedCard(){
+        return discardPack.pickCard(0, false);
+    }
 }
