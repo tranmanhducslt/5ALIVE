@@ -6,12 +6,20 @@
 package dough.fivealive;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,37 +115,36 @@ public class GameScreenController {
     private void handleCardPlay(int index) {
         Player currentPlayer = table.getCurrentPlayer(players);
 
-        Card playedCard = currentPlayer.playCard(index, table, players);
+        // Check and remove players with 0 lives before the current player plays
+        List<Player> playersToRemove = new ArrayList<>();
+        for (Player player : players) {
+            if (player.getLives() <= 0) {
+                System.out.println(player.getName() + " has lost all their lives!");
+                playersToRemove.add(player); // Mark for removal
+            }
+        }
 
-        // Check if only one player remains
+        for (Player playerToRemove : playersToRemove) {
+            players = table.removePlayer(players, playerToRemove, table);
+        }
+
+        // Check if the game is over
         if (players.size() == 1) {
-            currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
+            String winnerName = players.get(0).getName();
+            showGameEndScene(winnerName);
             return;
         }
-        updatePlayersContainer();
-        // Check if the current player has lost all lives
-        if (currentPlayer.isLost()) {
-            Player thisPlayer = currentPlayer;
-            table.nextPlayer(players);
-            currentPlayer = table.getCurrentPlayer(players);
-            System.out.println(thisPlayer.getName() + " has lost all their lives!");
-            players = table.removePlayer(players, thisPlayer, table);
 
-            // Check if only one player remains
-            if (players.size() == 1) {
-                currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
-                return;
-            }
+        // Current player plays a card
+        Card playedCard = currentPlayer.playCard(index, table, players);
 
-            updatePlayersContainer(); // Update players display
-        }
-        
+        // Update recently played card image
         if (playedCard != null) {
             String imagePath = "/img/C-" + playedCard.getCardType().name() + ".png";
             recentlyPlayedCardImage.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
         }
 
-        // Update count and check for exceeding 21
+        // Update count and reset if exceeded
         if (table.getCount() > 21) {
             table.resetCount();
             currentCountLabel.setText("Count exceeded 21. Resetting count.");
@@ -145,58 +152,67 @@ public class GameScreenController {
             currentCountLabel.setText("Current Count: " + table.getCount());
         }
 
-        // Handle special cards
-        if (table.shouldSkipNextPlayer()) {
-            table.resetSkipFlag();
-            nextPlayer(); // Skip next player
-        }
-        if (table.bombCheck()) {
-            handleBombCard(currentPlayer);
-            table.resetBombFlag();
-        }
-
-        // Check if only one player remains
-        if (players.size() == 1) {
-            currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
-            return;
-        }
-        updatePlayersContainer();
-        // Check if the current player has lost all lives
-        if (currentPlayer.isLost()) {
-            Player thisPlayer = currentPlayer;
-            table.nextPlayer(players);
-            System.out.println(thisPlayer.getName() + " has lost all their lives!");
-            players = table.removePlayer(players, thisPlayer, table);
-
-            // Check if only one player remains
-            if (players.size() == 1) {
-                currentPlayerLabel.setText("Game Over! " + players.get(0).getName() + " wins!");
-                return;
+        // Check and remove players with 0 lives AFTER the current player plays
+        List<Player> playersToRemove2 = new ArrayList<>();
+        for (Player player : players) {
+            if (player.getLives() <= 0) {
+                System.out.println(player.getName() + " has lost all their lives!");
+                playersToRemove2.add(player); // Mark for removal
             }
-            updatePlayersContainer(); // Update players display
         }
-        else {
-            // Move to the next turn
-            nextPlayer();
+
+        for (Player playerToRemove2 : playersToRemove2) {
+            Table.removePlayer(players, playerToRemove2, table);
+        }
+        // Handle special cards
+        if (players.size() > 1) { // Skip these checks if the game is over
+            if (table.shouldSkipNextPlayer()) {
+                table.resetSkipFlag();
+                nextPlayer(); // Skip next player
+            }
+            if (table.bombCheck()) {
+                handleBombCard(currentPlayer);
+                table.resetBombFlag();
+            }
         }
 
         // Check if anyone went out (played all cards)
         for (Player player : players) {
             if (player.getHand().isEmpty()) {
                 System.out.println(player.getName() + " has gone out! All other players lose 1 life.");
+                List<Player> affectedPlayers = new ArrayList<>();
                 for (Player otherPlayer : players) {
                     if (otherPlayer != player) {
-                        otherPlayer.lostLive();
+                        otherPlayer.lostLive(); // Deduct 1 life
+                        if (otherPlayer.getLives() <= 0) {
+                            affectedPlayers.add(otherPlayer); // Mark for removal if life <= 0
+                        }
                     }
                 }
-                table = new Table(players); // Reset the table
-                break; // Exit the loop once the table is reset
+
+                // Remove any players who lost all lives as a result
+                for (Player affectedPlayer : affectedPlayers) {
+                    System.out.println(affectedPlayer.getName() + " has lost all their lives due to going out penalty!");
+                    players = table.removePlayer(players, affectedPlayer, table);
+                }
+
+                // Reset the table after someone goes out
+                table = new Table(players);
+                break; // Exit loop once table is reset
             }
         }
 
-        updatePlayersContainer(); // Update players after checking who went out
-        
+        // Final game-over check
+        if (players.size() == 1) {
+            String winnerName = players.get(0).getName();
+            showGameEndScene(winnerName);
+            return;
+        }
+
+        updatePlayersContainer(); // Update UI
+        nextPlayer();
     }
+
 
     private void handleBombCard(Player currentPlayer) {
         for (Player player : players) {
@@ -215,5 +231,23 @@ public class GameScreenController {
     private void nextPlayer() {
         table.nextPlayer(players);
         updateGameState();
+    }
+    private void showGameEndScene(String winnerName) {
+        try {
+            // Load the Game Over FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/EndScreen.fxml"));
+            Parent root = loader.load();
+
+            // Set the winner's name
+            EndScreenController controller = loader.getController();
+            controller.setWinnerName(winnerName);
+
+            // Switch to the new scene
+            Stage primaryStage = (Stage) currentPlayerLabel.getScene().getWindow();
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setTitle("Game Over");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
