@@ -6,6 +6,7 @@
 package dough.fivealive;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class fiveAlive {
@@ -87,15 +88,19 @@ public class fiveAlive {
             }
         }
 
-        // Check if the player lost
-        if (currentPlayer.isLost()) {
-            System.out.println(currentPlayer.getName() + " has lost all their lives and is eliminated!");
-            // placeholder for eliminated Player
-            Player thisPlayer = currentPlayer;
-            currentPlayer = table.getCurrentPlayer(players);
-            players = table.removePlayer(players, thisPlayer, table);
-            checkWin();
+        // Check if any player has lost
+        // (in some cases, many can BOMB out at once)
+        List<Player> playersToRemove = new ArrayList<>();
+        for (Player player : players) {
+            if (player.isLost()) {
+                System.out.println(player.getName() + " has lost all their lives and is eliminated!");
+                playersToRemove.add(player);
+            }
         }
+        for (Player player : playersToRemove) {
+            players = table.removePlayer(players, player, table);
+        }
+        checkWin();
 
         // Move to next player
         table.nextPlayer(players);
