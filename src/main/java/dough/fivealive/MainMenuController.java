@@ -65,7 +65,19 @@ public class MainMenuController {
     @FXML
     public void startSettingsScreen() {
         System.out.println("Opening settings...");
-        // Transition to settings screen
+
+        try {
+            // load setup scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/SettingScreen.fxml"));
+            Parent settingRoot = loader.load();
+
+            Stage stage = (Stage) startSettingsButton.getScene().getWindow();
+            Scene settingScene = new Scene(settingRoot);
+            stage.setScene(settingScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load SettingScreen.fxml.");
+        }
     }
 
     @FXML
