@@ -25,11 +25,15 @@ public class fiveAlive {
         return currentPlayer;
     }
 
-    public void checkWin(){
+    public boolean checkWin() {
         if (players.size() == 1) {
             System.out.println("Game over! " + players.get(0).getName() + " wins!");
-            return;
+            if (uiUpdateCallback != null) {
+                uiUpdateCallback.accept(null);
+            }
+            return true;
         }
+        return false;
     }
 
     public int getCount() {
