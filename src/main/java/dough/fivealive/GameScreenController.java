@@ -17,6 +17,13 @@ import javafx.scene.input.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class GameScreenController {
 
     @FXML
@@ -37,6 +44,7 @@ public class GameScreenController {
     private fiveAlive game; // The game logic, which will be reflected here
 
     public void initializeGame(List<String> playerNames) {
+
         if (otherPlayersContainer == null) {
             System.out.println("Error: playersContainer is null. Check GameScreen.FXML file.");
             return;
@@ -52,7 +60,7 @@ public class GameScreenController {
         game.setUiUpdateCallback((Void) -> {
             Platform.runLater(this::refreshUI);
         });
-
+        game.setWinCallback(this::handleWinEvent);
         // Debug
         System.out.println("Game initialized with players: " + playerNames);
 
@@ -128,4 +136,24 @@ public class GameScreenController {
         updatePlayersContainer();
         updateGameState();
     }
+    private void handleWinEvent(Player winner) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("EndScreen.fxml"));
+                Parent endScreenRoot = loader.load();
+
+                // Get the controller and set the winner's name
+                EndScreenController endScreenController = loader.getController();
+                endScreenController.setWinnerName(winner.getName());
+
+                Stage stage = (Stage) currentPlayerLabel.getScene().getWindow();
+                Scene endScreenScene = new Scene(endScreenRoot);
+                stage.setScene(endScreenScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Failed to load EndScreen.fxml.");
+            }
+        });
+    }
+
 }
