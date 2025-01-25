@@ -1,10 +1,11 @@
 /* 
- * Author: Phuong Nguyen [ID], Nhu Nguyen [ID]
+ * Author: Duc Tran [1589830], Phuong Nguyen [ID], Nhu Nguyen [ID]
  * Purpose: For the game screen
 */
 
 package dough.fivealive;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -16,12 +17,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.input.MouseEvent;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameScreenController {
 
@@ -40,21 +46,26 @@ public class GameScreenController {
     @FXML
     private ImageView recentlyPlayedCardImage;
 
-    private Table table; // Game table to manage the state
-    private List<Player> players; // List of players in the game
+    private fiveAlive game; // The game logic, which will be reflected here
 
     public void initializeGame(List<String> playerNames) {
+
         if (otherPlayersContainer == null) {
             System.out.println("Error: playersContainer is null. Check GameScreen.FXML file.");
             return;
         }
-        // Initialize players and table
-        players = new ArrayList<>();
-        for (String name : playerNames) {
-            players.add(new Player(name));
-        }
-        table = new Table(players);
 
+        // Initialize players and game (change name strings to Players)
+        List<Player> players = playerNames.stream()
+                                          .map(Player::new)
+                                          .collect(Collectors.toList());
+        game = new fiveAlive(players);
+
+        // Set the UI update callback
+        game.setUiUpdateCallback((Void) -> {
+            Platform.runLater(this::refreshUI);
+        });
+        game.setWinCallback(this::handleWinEvent);
         // Debug
         System.out.println("Game initialized with players: " + playerNames);
 
@@ -64,15 +75,22 @@ public class GameScreenController {
     }
 
     private void updateGameState() {
-        Player currentPlayer = table.getCurrentPlayer(players);
-        System.out.println(currentPlayer.getName() + "'s lives: " + currentPlayer.getLives()); // debug
+        Player currentPlayer = game.getCurrentPlayer();
         updateCurrentPlayer(currentPlayer);
-        updatePlayerHand(currentPlayer.getHand()); // Refresh the hand
-        currentCountLabel.setText("Current Count: " + table.getCount());
+        updatePlayerHand(currentPlayer.getHand());
+        currentCountLabel.setText("Current Count: " + game.getCount());
+        updateRecentlyPlayedCard(game.getRecentlyPlayedCard());
     }
 
     private void updateCurrentPlayer(Player player) {
         currentPlayerLabel.setText("Current Player: " + player.getName());
+    }
+
+    @FXML
+    private void handleCardClick(MouseEvent event) {
+        ImageView clickedCard = (ImageView) event.getSource();
+        int cardIndex = playerHandContainer.getChildren().indexOf(clickedCard);
+        game.playCard(cardIndex);
     }
 
     private void updatePlayerHand(PackHand hand) {
@@ -89,18 +107,16 @@ public class GameScreenController {
             cardImage.setFitWidth(70);
             cardImage.setFitHeight(105);
 
-            // Add click event with the card's index
-            int index = i;
-            cardImage.setOnMouseClicked(event -> handleCardPlay(index));
+            // Add event handler for card click
+            cardImage.setOnMouseClicked(this::handleCardClick);
 
             playerHandContainer.getChildren().add(cardImage);
         }
     }
 
-
     private void updatePlayersContainer() {
         otherPlayersContainer.getChildren().clear();
-        for (Player player : players) {
+        for (Player player : game.getPlayers()) {
             Label playerLabel = new Label(player.getName() + " - Lives: " + player.getLives());
             playerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #444444; "
                     + "-fx-padding: 5 10; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 5; "
@@ -112,142 +128,37 @@ public class GameScreenController {
         }
     }
 
-    private void handleCardPlay(int index) {
-        Player currentPlayer = table.getCurrentPlayer(players);
 
-        // Check and remove players with 0 lives before the current player plays
-        List<Player> playersToRemove = new ArrayList<>();
-        for (Player player : players) {
-            if (player.getLives() <= 0) {
-                System.out.println(player.getName() + " has lost all their lives!");
-                playersToRemove.add(player); // Mark for removal
-            }
-        }
-
-        for (Player playerToRemove : playersToRemove) {
-            players = table.removePlayer(players, playerToRemove, table);
-        }
-
-        // Check if the game is over
-        if (players.size() == 1) {
-            String winnerName = players.get(0).getName();
-            showGameEndScene(winnerName);
-            return;
-        }
-
-        // Current player plays a card
-        Card playedCard = currentPlayer.playCard(index, table, players);
-
-        // Update recently played card image
-        if (playedCard != null) {
-            String imagePath = "/img/C-" + playedCard.getCardType().name() + ".png";
+    private void updateRecentlyPlayedCard(Card card) {
+        if (card != null) {
+            String imagePath = "/img/C-" + card.getCardType().name() + ".png";
             recentlyPlayedCardImage.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
-        }
-
-        // Update count and reset if exceeded
-        if (table.getCount() > 21) {
-            table.resetCount();
-            currentCountLabel.setText("Count exceeded 21. Resetting count.");
         } else {
-            currentCountLabel.setText("Current Count: " + table.getCount());
-        }
-
-        // Check and remove players with 0 lives AFTER the current player plays
-        List<Player> playersToRemove2 = new ArrayList<>();
-        for (Player player : players) {
-            if (player.getLives() <= 0) {
-                System.out.println(player.getName() + " has lost all their lives!");
-                playersToRemove2.add(player); // Mark for removal
-            }
-        }
-
-        for (Player playerToRemove2 : playersToRemove2) {
-            Table.removePlayer(players, playerToRemove2, table);
-        }
-        // Handle special cards
-        if (players.size() > 1) { // Skip these checks if the game is over
-            if (table.shouldSkipNextPlayer()) {
-                table.resetSkipFlag();
-                nextPlayer(); // Skip next player
-            }
-            if (table.bombCheck()) {
-                handleBombCard(currentPlayer);
-                table.resetBombFlag();
-            }
-        }
-
-        // Check if anyone went out (played all cards)
-        for (Player player : players) {
-            if (player.getHand().isEmpty()) {
-                System.out.println(player.getName() + " has gone out! All other players lose 1 life.");
-                List<Player> affectedPlayers = new ArrayList<>();
-                for (Player otherPlayer : players) {
-                    if (otherPlayer != player) {
-                        otherPlayer.lostLive(); // Deduct 1 life
-                        if (otherPlayer.getLives() <= 0) {
-                            affectedPlayers.add(otherPlayer); // Mark for removal if life <= 0
-                        }
-                    }
-                }
-
-                // Remove any players who lost all lives as a result
-                for (Player affectedPlayer : affectedPlayers) {
-                    System.out.println(affectedPlayer.getName() + " has lost all their lives due to going out penalty!");
-                    players = table.removePlayer(players, affectedPlayer, table);
-                }
-
-                // Reset the table after someone goes out
-                table = new Table(players);
-                break; // Exit loop once table is reset
-            }
-        }
-
-        // Final game-over check
-        if (players.size() == 1) {
-            String winnerName = players.get(0).getName();
-            showGameEndScene(winnerName);
-            return;
-        }
-
-        updatePlayersContainer(); // Update UI
-        nextPlayer();
-    }
-
-
-    private void handleBombCard(Player currentPlayer) {
-        for (Player player : players) {
-            if (player != currentPlayer) {
-                if (!player.hasCard(cardType.ZERO)) {
-                    player.lostLive();
-                    System.out.println(player.getName() + " cannot play a ZERO and loses 1 life.");
-                } else {
-                    player.discardCard(cardType.ZERO, table);
-                    System.out.println(player.getName() + " discarded their ZERO!");
-                }
-            }
+            recentlyPlayedCardImage.setImage(null);
         }
     }
 
-    private void nextPlayer() {
-        table.nextPlayer(players);
+    public void refreshUI() {
+        updatePlayersContainer();
         updateGameState();
     }
-    private void showGameEndScene(String winnerName) {
-        try {
-            // Load the Game Over FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/EndScreen.fxml"));
-            Parent root = loader.load();
+    private void handleWinEvent(Player winner) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("EndScreen.fxml"));
+                Parent endScreenRoot = loader.load();
 
-            // Set the winner's name
-            EndScreenController controller = loader.getController();
-            controller.setWinnerName(winnerName);
+                // Get the controller and set the winner's name
+                EndScreenController endScreenController = loader.getController();
+                endScreenController.setWinnerName(winner.getName());
 
-            // Switch to the new scene
-            Stage primaryStage = (Stage) currentPlayerLabel.getScene().getWindow();
-            primaryStage.setScene(new Scene(root));
-            primaryStage.setTitle("Game Over");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                Stage stage = (Stage) currentPlayerLabel.getScene().getWindow();
+                Scene endScreenScene = new Scene(endScreenRoot);
+                stage.setScene(endScreenScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Failed to load EndScreen.fxml.");
+            }
+        });
     }
 }
