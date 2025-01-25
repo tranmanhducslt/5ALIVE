@@ -14,6 +14,12 @@ public class fiveAlive {
     private Player currentPlayer;
     private Table table;
     private Consumer<Void> uiUpdateCallback;
+    private Consumer<Player> winCallback;
+
+    public void setWinCallback(Consumer<Player> winCallback) {
+        this.winCallback = winCallback;
+    }
+
 
     public fiveAlive(List<Player> playerInput) {
         players = playerInput;
@@ -31,10 +37,14 @@ public class fiveAlive {
             if (uiUpdateCallback != null) {
                 uiUpdateCallback.accept(null);
             }
+            if (winCallback != null) {
+                winCallback.accept(players.get(0));
+            }
             return true;
         }
         return false;
     }
+
 
     public int getCount() {
         return table.getCount();
