@@ -8,11 +8,18 @@ import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        AudioManager audioManager = AudioManager.getInstance();
+        audioManager.playBackgroundMusic();
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("Five Alive!");

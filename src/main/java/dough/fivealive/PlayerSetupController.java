@@ -97,11 +97,11 @@ public class PlayerSetupController {
         try {
             // load setup scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-            Parent playerSetupRoot = loader.load();
+            Parent mainMenuRoot = loader.load();
 
             Stage stage = (Stage) returnMenuButton.getScene().getWindow();
-            Scene playerSetupScene = new Scene(playerSetupRoot);
-            stage.setScene(playerSetupScene);
+            Scene mainMenuScene = new Scene(mainMenuRoot);
+            stage.setScene(mainMenuScene);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load MainMenu.fxml.");
