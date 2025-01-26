@@ -1,3 +1,8 @@
+/* 
+ * Author: Phuong Nguyen [ID]
+ * Purpose: As a screen to show the end of a game and its winner
+*/
+
 package dough.fivealive;
 
 import javafx.fxml.FXML;

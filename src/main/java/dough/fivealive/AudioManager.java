@@ -1,3 +1,8 @@
+/* 
+ * Author: Phuong Nguyen [ID]
+ * Purpose: Managing sounds in the game
+*/
+
 package dough.fivealive;
 
 import javafx.scene.media.Media;

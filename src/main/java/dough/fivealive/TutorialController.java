@@ -1,6 +1,6 @@
 /* 
  * Author: Phuong Nguyen [ID]
- * Purpose: Tutorial screen
+ * Purpose: Controller for the tutorial screen
 */
 
 package dough.fivealive;

@@ -1,7 +1,7 @@
 /*
  * Author: Phuong Nguyen [ID]
  * Purpose: Controller for the Settings screen
- */
+*/
 
 package dough.fivealive;
 
