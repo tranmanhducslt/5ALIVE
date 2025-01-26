@@ -20,7 +20,7 @@ public class AudioManager {
     private AudioManager() {
         try {
             // Load the background music file
-            Media backgroundMusic = new Media(getClass().getResource("/audio/testBGM.mp3").toURI().toString());
+            Media backgroundMusic = new Media(getClass().getResource("/audio/mainBGM.mp3").toURI().toString());
             backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
 
             // Set the music to loop indefinitely
