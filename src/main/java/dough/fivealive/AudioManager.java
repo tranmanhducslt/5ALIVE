@@ -78,4 +78,11 @@ public class AudioManager {
     public static double getSoundEffectsVolume() {
         return soundEffectsVolume;
     }
+
+    public static void playSoundEffect(String soundPath) {
+        Media sound = new Media(AudioManager.class.getResource(soundPath).toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(getSoundEffectsVolume());
+        mediaPlayer.play();
+    }
 }

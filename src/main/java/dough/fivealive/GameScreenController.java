@@ -15,9 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +63,8 @@ public class GameScreenController {
         game.setWinCallback(this::handleWinEvent);
         // Debug
         System.out.println("Game initialized with players: " + playerNames);
-
+        // Play start sound effect using AudioManager
+        AudioManager.playSoundEffect("/audio/gameStart.mp3");
         // Update UI with initial state
         updatePlayersContainer();
         updateGameState();
@@ -88,12 +87,8 @@ public class GameScreenController {
         ImageView clickedCard = (ImageView) event.getSource();
         int cardIndex = playerHandContainer.getChildren().indexOf(clickedCard);
         game.playCard(cardIndex);
-
-        // Play card sound effect
-        String soundPath = getClass().getResource("/audio/cardPlay.mp3").toString();
-        Media sound = new Media(soundPath);
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        // Play card sound effect using AudioManager
+        AudioManager.playSoundEffect("/audio/cardPlay.mp3");
     }
 
     private void updatePlayerHand(PackHand hand) {
