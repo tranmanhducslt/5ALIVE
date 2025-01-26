@@ -4,7 +4,6 @@
 */
 
 package dough.fivealive;
-import javafx.scene.image.Image;
 
 enum cardType{ // types of cards
     ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, DRAW_1, DRAW_2, PASS, REVERSE, SKIP, EQ_21, EQ_10, EQ_0, REDEAL, BOMB

@@ -12,4 +12,6 @@ written in Java using JavaFX for GUI
 ## information
 collaborators: Manh Duc Tran, Tran Chan Nhu Nguyen, Gia Phuong Nguyen
 
+sound effects by freesound_community from Pixabay
+
 as part of the Advanced Java course, WiSe 2024-25, FRA-UAS, Hessen, Germany

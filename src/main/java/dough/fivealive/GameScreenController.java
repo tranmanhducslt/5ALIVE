@@ -8,23 +8,20 @@ package dough.fivealive;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -91,6 +88,12 @@ public class GameScreenController {
         ImageView clickedCard = (ImageView) event.getSource();
         int cardIndex = playerHandContainer.getChildren().indexOf(clickedCard);
         game.playCard(cardIndex);
+
+        // Play card sound effect
+        String soundPath = getClass().getResource("/audio/cardPlay.mp3").toString();
+        Media sound = new Media(soundPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     private void updatePlayerHand(PackHand hand) {

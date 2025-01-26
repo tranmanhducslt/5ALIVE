@@ -10,7 +10,6 @@ public class Player{
     private String name;
     private int lives;
     private PackHand hand;
-    private String message;
     public Player(String name){
         this.name = name;
         this.lives = 5;
@@ -61,10 +60,6 @@ public class Player{
         setName(newName);
         System.out.println("Player's name has been changed to: " + this.name);
         scanner.close();
-    }
-    public void sendMsg(String message){
-        this.message = message;
-        System.out.println("Message sent: " + message);
     }
     public void addCard(Card card) {
         hand.addCard(card);

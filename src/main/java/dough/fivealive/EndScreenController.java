@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +27,18 @@ public class EndScreenController {
 
     @FXML
     private Button returnToGameSetupButton;
+
+    @FXML
+    public void initialize() {
+        playVictorySound();
+    }
+
+    private void playVictorySound() {
+        String soundPath = getClass().getResource("/audio/victory.mp3").toString();
+        Media sound = new Media(soundPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
 
     public void setWinnerName(String winnerName) {
         winnerLabel.setText("Congratulations, " + winnerName + "!");
