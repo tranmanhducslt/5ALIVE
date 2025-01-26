@@ -10,15 +10,15 @@
 
 <StackPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.PlayerSetupController">
     <children>
-        <VBox alignment="TOP_CENTER" spacing="10.0">
+        <VBox alignment="TOP_CENTER" spacing="0.0">
             <children>
-                <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="Setup" />
+                <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: black;" text="Setup" />
             </children>
         </VBox>
 
         <VBox alignment="CENTER" spacing="20.0">
             <children>
-                <Label style="-fx-font-size: 18px; -fx-text-fill: white;" text="Select Number of Players:" />
+                <Label style="-fx-font-size: 18px; -fx-text-fill: black;" text="Select Number of Players:" />
                 <ComboBox fx:id="playerCountComboBox" prefWidth="200.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -33,8 +33,8 @@
                 <VBox fx:id="playerNamesContainer" alignment="CENTER" maxWidth="200.0" spacing="10.0">
                     <!-- Player name fields will be dynamically added here -->
                 </VBox>
-                <Button fx:id="startGameButton" onAction="#startGame" prefWidth="200.0" text="Start Game" />
-            <Button fx:id="returnMenuButton" onAction="#returnMenuScreen" prefWidth="200.0" text="Return To Menu" />
+                <Button fx:id="startGameButton" alignment="CENTER" onAction="#startGame" style="-fx-background-color: black; -fx-text-fill: #FFFFFF; -fx-font-size: 18px;" maxWidth="200.0" text="Start Game" />
+            <Button fx:id="returnMenuButton" alignment="CENTER" onAction="#returnMenuScreen" style="-fx-background-color: black; -fx-text-fill: #FFFFFF; -fx-font-size: 18px;" maxWidth="200.0" text="Return To Menu" />
             </children>
         </VBox>
     </children>

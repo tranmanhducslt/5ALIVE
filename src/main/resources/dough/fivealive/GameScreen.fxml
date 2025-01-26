@@ -33,7 +33,7 @@
          </children>
       </VBox>
       <!-- Top Section: Other Players -->
-      <VBox fx:id="otherPlayersContainer" alignment="CENTER" layoutX="761.0" layoutY="131.0" prefHeight="15.0" prefWidth="250.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #555555;">
+      <VBox fx:id="otherPlayersContainer" alignment="CENTER" prefHeight="15.0" prefWidth="250.0" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #555555;" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="131.0">
       </VBox>
    </children>
 </AnchorPane>

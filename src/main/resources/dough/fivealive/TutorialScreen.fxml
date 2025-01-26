@@ -7,7 +7,7 @@
 
 <VBox prefHeight="768.0" prefWidth="1024.0" spacing="20.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dough.fivealive.TutorialController" alignment="CENTER">
     <!-- Title Section -->
-    <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="How to Play" />
+    <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: black;" text="How to Play" />
 
     <!-- Scrollable Content Section -->
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: transparent; -fx-background-color: transparent;">
@@ -55,5 +55,5 @@
     </ScrollPane>
 
     <!-- Return Button Section -->
-    <Button fx:id="returnMenuButton" style="-fx-background-color: #333333; -fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10;" text="Return to Menu" onAction="#returnMenuScreen" />
+    <Button fx:id="returnMenuButton" alignment="CENTER" maxWidth="200.0" style="-fx-background-color: black; -fx-text-fill: #FFFFFF; -fx-font-size: 18px;" text="Return to Menu" onAction="#returnMenuScreen" />
 </VBox>

@@ -9,7 +9,7 @@
 <AnchorPane fx:controller="dough.fivealive.SettingScreenController" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <!-- Title Section -->
-        <Label alignment="CENTER" layoutY="27.0" style="-fx-font-size: 36; -fx-text-fill: black; -fx-font-weight: bold;" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+        <Label alignment="CENTER" layoutY="27.0" style="-fx-font-size: 36; -fx-text-fill: black; -fx-font-weight: bold;" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
         <!-- Sliders Section -->
         <VBox alignment="CENTER" layoutX="350.0" layoutY="266.0" prefHeight="235.0" prefWidth="325.0" spacing="30" AnchorPane.bottomAnchor="267.59999999999997" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="349.19999999999993" AnchorPane.topAnchor="266.0">
@@ -27,7 +27,7 @@
                 </VBox>
       
                     <!-- Return to Menu Button -->
-              <Button fx:id="returnToMenuButton" alignment="CENTER" maxWidth="300.0" onAction="#returnToMenu" style="-fx-font-size: 18; -fx-text-fill: white; -fx-background-color: #34495e;" text="Return to Menu" />
+              <Button fx:id="returnToMenuButton" alignment="CENTER" maxWidth="200.0" onAction="#returnToMenu" style="-fx-font-size: 18; -fx-text-fill: white; -fx-background-color: black;" text="Return to Menu" />
             </children>
         </VBox>
     </children>
