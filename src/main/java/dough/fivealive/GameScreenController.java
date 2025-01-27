@@ -1,5 +1,5 @@
 /* 
- * Author: Duc Tran [1589830], Phuong Nguyen [ID], Nhu Nguyen [ID]
+ * Author: Duc Tran [1589830], Phuong Nguyen [ID], Nhu Nguyen [1589757]
  * Purpose: For the game screen
 */
 
