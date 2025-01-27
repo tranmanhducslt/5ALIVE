@@ -1,5 +1,5 @@
 /* 
- * Author: Duc Tran [1589830], Nhu Nguyen [ID]
+ * Author: Duc Tran [1589830], Nhu Nguyen [1589757]
  * Purpose: To represent classes for card packs: draw, discard and player
 */
 
