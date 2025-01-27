@@ -116,15 +116,10 @@ public class GameScreenController {
             Player currentPlayer = game.getCurrentPlayer();
             for (Player player : game.getPlayers()) {
                 Label playerLabel = new Label(player.getName() + " - Lives: " + player.getLives());
-                if (player.equals(currentPlayer)) {
-                    playerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: green; "
-                            + "-fx-padding: 5 10; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 5; "
-                            + "-fx-background-radius: 5;");
-                } else {
-                    playerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #444444; "
-                            + "-fx-padding: 5 10; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 5; "
-                            + "-fx-background-radius: 5;");
-                }
+                String backgroundColor = player.equals(currentPlayer) ? "green" : "#444444";
+                playerLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: " + backgroundColor + "; "
+                        + "-fx-padding: 5 10; -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 5; "
+                        + "-fx-background-radius: 5;");
                 playerLabel.setMinWidth(200);
                 playerLabel.setMaxWidth(400);
                 playerLabel.setWrapText(true); // Enable wrapping if needed
