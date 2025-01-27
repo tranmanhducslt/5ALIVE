@@ -135,6 +135,7 @@ public class GameScreenController {
             otherPlayersContainer.getChildren().add(arrowLabel);
         }
 
+        // Show top card on the table
         private void updateRecentlyPlayedCard(Card card) {
         if (card != null) {
             String imagePath = "/img/C-" + card.getCardType().name() + ".png";
@@ -144,10 +145,13 @@ public class GameScreenController {
         }
     }
 
+    // Refresh the UI to reflect the current game state
     public void refreshUI() {
         updatePlayersContainer();
         updateGameState();
     }
+
+    // Show Win screen
     private void handleWinEvent(Player winner) {
         Platform.runLater(() -> {
             try {

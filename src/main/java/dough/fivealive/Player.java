@@ -26,11 +26,6 @@ public class Player{
     }
     public void lostLive() {
         this.lives--;
-        /* 
-        if (this.lives <= 0) {
-            System.out.println(name + " has lost all their lives!");
-        }
-        */
     }
     // Method to play a card from the player's hand
     public Card playCard(int index, Table table, List<Player> players) {
@@ -61,13 +56,18 @@ public class Player{
         System.out.println("Player's name has been changed to: " + this.name);
         scanner.close();
     }
+
+    // Method to add a card to the player's hand
     public void addCard(Card card) {
         hand.addCard(card);
     }
-    //  Method for player's hand, to check if e.g. gone out
+
+    // Method for player's hand, to check if e.g. gone out
     public PackHand getHand() {
         return hand;
     }
+    
+    // Method to check if a player has a specific card in their hand
     public boolean hasCard(cardType type) {
         for (Card card : hand.getCards()) {
             if (card.getCardType() == type) {

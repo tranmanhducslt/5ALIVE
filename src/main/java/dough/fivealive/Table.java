@@ -37,6 +37,7 @@ public class Table {
         return players.get(currentPlayerIndex);
     }
 
+    // Used for the UI indication
     public boolean isClockwise() {
         return isClockwise;
     }
@@ -151,6 +152,7 @@ public class Table {
     public boolean shouldSkipNextPlayer(){
         return skipNextPlayer;
     }
+    // After each SKIP, reset the flag
     public void resetSkipFlag(){
         skipNextPlayer = false;
         return;
@@ -168,6 +170,7 @@ public class Table {
     public boolean bombCheck(){
         return bombCardPlayed;
     }
+    // After each use of the BOMB card, reset the flag
     public void resetBombFlag(){
         bombCardPlayed = false;
     }

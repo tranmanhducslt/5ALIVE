@@ -19,7 +19,8 @@ public class fiveAlive {
     public void setWinCallback(Consumer<Player> winCallback) {
         this.winCallback = winCallback;
     }
-
+    
+    // Used for the UI indication
     public boolean isClockwise() {
         return table.isClockwise();
     }
@@ -34,6 +35,7 @@ public class fiveAlive {
         return currentPlayer;
     }
 
+    // Last man standing
     public boolean checkWin() {
         if (players.size() == 1) {
             System.out.println("Game over! " + players.get(0).getName() + " wins!");
@@ -53,6 +55,7 @@ public class fiveAlive {
         return table.getCount();
     }
 
+    // Top card on the table
     public Card getRecentlyPlayedCard() {
         return table.getRecentlyPlayedCard();
     }
@@ -60,11 +63,13 @@ public class fiveAlive {
     public List<Player> getPlayers() {
         return players;
     }
-
+    
+    // Reflect the game logic in UI
     public void setUiUpdateCallback(Consumer<Void> uiUpdateCallback) {
         this.uiUpdateCallback = uiUpdateCallback;
     }
 
+    // Play a card from the current player's hand
     public void playCard(int index) {
         if (index < 0 || index >= currentPlayer.getHand().size()) {
             throw new IllegalArgumentException("Invalid card index");
