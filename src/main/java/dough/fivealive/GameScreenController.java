@@ -131,12 +131,12 @@ public class GameScreenController {
                 otherPlayersContainer.getChildren().add(playerLabel);
             }
             // Add an arrow to indicate the direction of play
-            String arrowText = game.isClockwise() ? "\u2193" : "\u2191"; // Unicode for down and up arrows
+            String arrowText = game.isClockwise() ? "\u21E9" : "\u21E7"; // Unicode for down and up arrows
             Label arrowLabel = new Label(arrowText);
-            arrowLabel.setStyle("-fx-font-size: 72px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #888888;"
+            arrowLabel.setStyle("-fx-font-size: 80px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #666666;"
                 + "-fx-background-radius: 5; -fx-alignment: center;");
-            arrowLabel.setMinSize(100, 100);
-            arrowLabel.setMaxSize(100, 100);
+            arrowLabel.setMinWidth(200);
+            arrowLabel.setMaxWidth(400);
             otherPlayersContainer.getChildren().add(arrowLabel);
         }
 
