@@ -20,6 +20,9 @@ public class fiveAlive {
         this.winCallback = winCallback;
     }
 
+    public boolean isClockwise() {
+        return table.isClockwise();
+    }
 
     public fiveAlive(List<Player> playerInput) {
         players = playerInput;

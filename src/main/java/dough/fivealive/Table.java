@@ -37,6 +37,10 @@ public class Table {
         return players.get(currentPlayerIndex);
     }
 
+    public boolean isClockwise() {
+        return isClockwise;
+    }
+
     public void nextPlayer(List<Player> players) {
         if(isClockwise){
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();

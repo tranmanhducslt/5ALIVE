@@ -130,6 +130,14 @@ public class GameScreenController {
                 playerLabel.setWrapText(true); // Enable wrapping if needed
                 otherPlayersContainer.getChildren().add(playerLabel);
             }
+            // Add an arrow to indicate the direction of play
+            String arrowText = game.isClockwise() ? "\u2193" : "\u2191"; // Unicode for down and up arrows
+            Label arrowLabel = new Label(arrowText);
+            arrowLabel.setStyle("-fx-font-size: 72px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #888888;"
+                + "-fx-background-radius: 5; -fx-alignment: center;");
+            arrowLabel.setMinSize(100, 100);
+            arrowLabel.setMaxSize(100, 100);
+            otherPlayersContainer.getChildren().add(arrowLabel);
         }
 
         private void updateRecentlyPlayedCard(Card card) {
