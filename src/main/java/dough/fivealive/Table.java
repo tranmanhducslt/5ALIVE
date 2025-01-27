@@ -1,5 +1,5 @@
 /* 
- * Author: Duc Tran [1589830], Nhu Nguyen [ID], Phuong Nguyen [ID]
+ * Author: Duc Tran [1589830], Nhu Nguyen [1589757], Phuong Nguyen [ID]
  * Purpose: As a platform for packs and interactions between players
 */
 
