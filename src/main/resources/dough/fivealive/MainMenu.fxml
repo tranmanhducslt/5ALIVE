@@ -59,10 +59,10 @@
             </ImageView>
          </children>
       </HBox>
-      <Text fill="#444444" layoutX="595.0" layoutY="748.0" strokeType="OUTSIDE" strokeWidth="0.0" text="made by three clueless FRA-UAS exchange students, 2025" textAlignment="RIGHT" wrappingWidth="414.13671875">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
+        <Text fill="#444444" strokeType="OUTSIDE" strokeWidth="0.0" text="made by three clueless FRA-UAS exchange students, 2025" textAlignment="RIGHT" wrappingWidth="414.13671875" AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
     </children>
 </AnchorPane>
