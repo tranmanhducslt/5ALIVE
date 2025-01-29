@@ -60,6 +60,7 @@ public class PlayerSetupController {
 
     @FXML
     public void startGame() {
+        // Get player names from the TextFields
         List<String> playerNames = new ArrayList<>();
         for (TextField textField : playerNameFields) {
             String name = textField.getText().trim();

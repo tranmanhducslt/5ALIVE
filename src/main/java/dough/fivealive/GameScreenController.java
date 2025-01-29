@@ -1,6 +1,6 @@
 /* 
  * Author: Duc Tran [1589830], Phuong Nguyen [ID], Nhu Nguyen [1589757]
- * Purpose: For the game screen
+ * Purpose: Controller for the whole game screen
 */
 
 package dough.fivealive;
@@ -70,6 +70,7 @@ public class GameScreenController {
         updateGameState();
     }
 
+    // Main function to update the game state on the UI
     private void updateGameState() {
         Player currentPlayer = game.getCurrentPlayer();
         updateCurrentPlayer(currentPlayer);
@@ -82,6 +83,7 @@ public class GameScreenController {
         currentPlayerLabel.setText("Current Player: " + player.getName());
     }
 
+    // Update when a card is played
     @FXML
     private void handleCardClick(MouseEvent event) {
         ImageView clickedCard = (ImageView) event.getSource();
@@ -112,6 +114,7 @@ public class GameScreenController {
         }
     }
         private void updatePlayersContainer() {
+            // Show players' information, highlighting the current player
             otherPlayersContainer.getChildren().clear();
             Player currentPlayer = game.getCurrentPlayer();
             for (Player player : game.getPlayers()) {

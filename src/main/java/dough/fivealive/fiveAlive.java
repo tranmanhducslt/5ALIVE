@@ -50,7 +50,7 @@ public class fiveAlive {
         return false;
     }
 
-
+    // Running total of the game
     public int getCount() {
         return table.getCount();
     }

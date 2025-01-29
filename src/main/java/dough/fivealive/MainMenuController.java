@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainMenuController {
+    // buttons for the main menu, represented with card graphics
     @FXML
     private Button startSetupButton;
 
@@ -27,12 +28,12 @@ public class MainMenuController {
     @FXML
     private Button quitGameButton;
 
+    // methods to handle button clicks
     @FXML
     public void startSetupScreen() {
         System.out.println("Starting the game...");
 
         try {
-            // load setup scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dough/fivealive/PlayerSetup.fxml"));
             Parent playerSetupRoot = loader.load();
 

@@ -43,6 +43,7 @@ public class Player{
         return playedCard;
     }
 
+    // Method to set a player's name
     public void setName(String name) {
         this.name = name;
     }

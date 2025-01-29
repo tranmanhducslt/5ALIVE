@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    // Start the application and all the classes
     @Override
     public void start(Stage primaryStage) throws Exception {
         AudioManager audioManager = AudioManager.getInstance();

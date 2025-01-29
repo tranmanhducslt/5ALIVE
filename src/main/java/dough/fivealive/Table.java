@@ -42,6 +42,7 @@ public class Table {
         return isClockwise;
     }
 
+    // Method to switch to the next player, using player list
     public void nextPlayer(List<Player> players) {
         if(isClockwise){
             currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
@@ -88,6 +89,7 @@ public class Table {
             case EQ_0:
                 count = 0;
                 break;
+            // DRAW cards require draw pack check every draw
             case DRAW_1:
                 for (Player player: players) 
                     if (player != getCurrentPlayer(players)) {
