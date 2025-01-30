@@ -1,7 +1,6 @@
 # 5ALIVE
-adaptation of the 2021 Hasbro card game 5 Alive
-
-written in Java using JavaFX for GUI
+- adaptation of the 2021 Hasbro card game [5 Alive](https://consumercare.hasbro.com/api/download/F4205_en-us)
+- written in Java, using JavaFX and [SceneBuilder](https://gluonhq.com/products/scene-builder/) for graphics
 
 ## how to run
 - install each of the following, one by one, then move to Step 2:
@@ -16,10 +15,7 @@ written in Java using JavaFX for GUI
 - special Wild cards help reduce the risk OR force other players to lose
 
 ## information
-collaborators: Manh Duc Tran, Tran Chan Nhu Nguyen, Gia Phuong Nguyen
-
-sound effects by freesound_community from Pixabay
-
-background music by SamuelFrancoMusica from Pixabay
-
-as part of the Advanced Java course, WiSe 2024-25, FRA-UAS, Hessen, Germany
+- collaborators: Manh Duc Tran, Tran Chan Nhu Nguyen, Gia Phuong Nguyen
+- sound effects by freesound_community from Pixabay
+- background music by SamuelFrancoMusica from Pixabay
+- as part of the Advanced Java course, WiSe 2024-25, FRA-UAS, Hessen, Germany
