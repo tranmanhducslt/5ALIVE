@@ -13,6 +13,7 @@ public class fiveAlive {
     private List<Player> players;
     private Player currentPlayer;
     private Table table;
+    // callbacks for UI update and win event
     private Consumer<Void> uiUpdateCallback;
     private Consumer<Player> winCallback;
 
