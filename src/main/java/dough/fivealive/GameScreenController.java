@@ -1,5 +1,5 @@
 /* 
- * Author: Duc Tran [1589830], Phuong Nguyen [ID], Nhu Nguyen [1589757]
+ * Author: Duc Tran [1589830], Phuong Nguyen [1589140], Nhu Nguyen [1589757]
  * Purpose: Controller for the whole game screen
 */
 

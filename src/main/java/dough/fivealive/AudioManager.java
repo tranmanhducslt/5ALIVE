@@ -1,5 +1,5 @@
 /* 
- * Author: Phuong Nguyen [ID]
+ * Author: Phuong Nguyen [1589140]
  * Purpose: Managing sounds in the game
 */
 

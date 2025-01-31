@@ -1,5 +1,5 @@
 /* 
- * Author: Phuong Nguyen [ID]
+ * Author: Phuong Nguyen [1589140]
  * Purpose: As a screen to show the end of a game and its winner
 */
 

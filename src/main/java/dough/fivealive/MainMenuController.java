@@ -1,5 +1,5 @@
 /* 
- * Author: Duc Tran [1589830], Phuong Nguyen [ID]
+ * Author: Duc Tran [1589830], Phuong Nguyen [1589140]
  * Purpose: To control the main menu screen
 */
 

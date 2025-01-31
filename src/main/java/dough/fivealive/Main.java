@@ -1,5 +1,5 @@
 /* 
- * Author: Phuong Nguyen [ID]
+ * Author: Phuong Nguyen [1589140]
  * Purpose: The main file for the whole application
 */
 
